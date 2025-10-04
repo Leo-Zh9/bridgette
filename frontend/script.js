@@ -1,7 +1,7 @@
 // Configuration - Backend URL based on environment
 const BACKEND_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
     ? 'http://localhost:5000' 
-    : window.location.origin.replace('3000', '5000').replace('3001', '5000').replace('3005', '5000');
+    : window.location.origin;
 document.addEventListener('DOMContentLoaded', function() {
     // Add smooth scrolling to all anchor links
     const links = document.querySelectorAll('a[href^="#"]');

@@ -7,15 +7,6 @@ import tempfile
 app = Flask(__name__)
 CORS(app)  # Enable CORS for frontend communication
 
-# Environment configuration
-app.config['DEBUG'] = os.environ.get('FLASK_DEBUG', 'False').lower() == 'true'
-app.config['HOST'] = os.environ.get('FLASK_HOST', '0.0.0.0')
-app.config['PORT'] = int(os.environ.get('PORT', 5000))
-
-# Configuration
-ALLOWED_EXTENSIONS = {'csv', 'xlsx', 'xls'}
-MAX_FILE_SIZE = 10 * 1024 * 1024  # 10MB
-
 # Configuration
 ALLOWED_EXTENSIONS = {'csv', 'xlsx', 'xls'}
 MAX_FILE_SIZE = 10 * 1024 * 1024  # 10MB
@@ -137,11 +128,16 @@ def health_check():
     """Health check endpoint"""
     return jsonify({'status': 'healthy', 'message': 'Bridgette backend is running'})
 
+# Vercel serverless function handler
+def handler(request):
+    return app(request.environ, lambda *args: None)
+
+# For local development
 if __name__ == '__main__':
     print("Starting Bridgette Backend Server...")
-    print(f"Backend will be available at: http://{app.config['HOST']}:{app.config['PORT']}")
+    print(f"Backend will be available at: http://0.0.0.0:5000")
     print("API Endpoints:")
     print("  POST /api/process-files - Process uploaded files (any number)")
     print("  GET  /api/health - Health check")
     print("Supported formats: CSV, Excel (.xlsx, .xls)")
-    app.run(debug=app.config['DEBUG'], host=app.config['HOST'], port=app.config['PORT'])
+    app.run(debug=False, host='0.0.0.0', port=5000)
