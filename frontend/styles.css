@@ -109,6 +109,7 @@ header {
 .about {
     padding: 80px 0;
     background: white;
+    scroll-margin-top: 80px;
 }
 
 .about h2 {
@@ -131,6 +132,7 @@ header {
 .services {
     padding: 80px 0;
     background: #f8f9fa;
+    scroll-margin-top: 80px;
 }
 
 .services h2 {
@@ -171,10 +173,218 @@ header {
     line-height: 1.6;
 }
 
+/* Upload Section */
+.upload {
+    padding: 80px 0;
+    background: white;
+    scroll-margin-top: 80px;
+}
+
+.upload h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.upload p {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 3rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.upload-area {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.upload-box {
+    border: 3px dashed #667eea;
+    border-radius: 15px;
+    padding: 3rem 2rem;
+    text-align: center;
+    background: #f8f9fa;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    margin-bottom: 2rem;
+}
+
+.upload-box:hover {
+    border-color: #5a67d8;
+    background: #e9ecef;
+    transform: translateY(-2px);
+}
+
+.upload-box.dragover {
+    border-color: #5a67d8;
+    background: #e9ecef;
+    transform: scale(1.02);
+}
+
+.upload-icon {
+    font-size: 3rem;
+    color: #667eea;
+    margin-bottom: 1rem;
+}
+
+.upload-box h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.upload-box p {
+    color: #666;
+    margin-bottom: 1.5rem;
+}
+
+.upload-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.upload-btn:hover {
+    transform: translateY(-2px);
+}
+
+.file-list {
+    margin-top: 2rem;
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    border: 1px solid #e9ecef;
+}
+
+.file-list h4 {
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+.file-list ul {
+    list-style: none;
+    padding: 0;
+}
+
+.file-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+    background: #f8f9fa;
+}
+
+.file-name {
+    font-weight: 500;
+    color: #333;
+}
+
+.file-size {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.remove-file {
+    background: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+.upload-actions {
+    margin-top: 2rem;
+    text-align: center;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.process-btn {
+    background: #28a745;
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.process-btn:hover {
+    transform: translateY(-2px);
+}
+
+.clear-btn {
+    background: #6c757d;
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.clear-btn:hover {
+    transform: translateY(-2px);
+}
+
+.upload-info {
+    margin-top: 3rem;
+    text-align: center;
+}
+
+.upload-info h4 {
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+.file-types {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.file-type {
+    background: #667eea;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.upload-note {
+    color: #666;
+    font-size: 0.9rem;
+}
+
 /* Contact Section */
 .contact {
     padding: 80px 0;
     background: white;
+    scroll-margin-top: 80px;
 }
 
 .contact h2 {
