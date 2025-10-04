@@ -1,0 +1,28 @@
+{
+  "name": "bridgette",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "npx http-server frontend -p 3000 -o",
+    "start": "npx http-server frontend -p 3000 -o",
+    "build": "echo 'Static files are ready in frontend folder'",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Leo-Zh9/bridgette.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Leo-Zh9/bridgette/issues"
+  },
+  "homepage": "https://github.com/Leo-Zh9/bridgette#readme",
+  "dependencies": {
+    "next": "^15.5.4",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  }
+}
