@@ -42,10 +42,11 @@ jobs:
         ls -la frontend/
         echo "Frontend test passed"
 
-  deploy:
+  # Optional Vercel deployment (only runs if secrets are configured)
+  deploy-vercel:
     needs: test
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main' && secrets.VERCEL_TOKEN != ''
     
     steps:
     - uses: actions/checkout@v3
