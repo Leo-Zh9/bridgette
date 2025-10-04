@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "npx http-server frontend -p 3000 -o",
-    "start": "npx http-server frontend -p 3000 -o",
+    "dev": "concurrently \"npx http-server frontend -p 3000 -o\" \"npx http-server frontend -p 3001 -o\" \"npx http-server frontend -p 3002 -o\" \"npx http-server frontend -p 3003 -o\" \"npx http-server frontend -p 3004 -o\"",
+    "dev:single": "npx http-server frontend -p 3005 -o",
+    "start": "npx http-server frontend -p 3001 -o",
     "build": "echo 'Static files are ready in frontend folder'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -23,6 +24,7 @@
   "dependencies": {
     "next": "^15.5.4",
     "react": "^19.2.0",
-    "react-dom": "^19.2.0"
+    "react-dom": "^19.2.0",
+    "concurrently": "^8.2.2"
   }
 }
