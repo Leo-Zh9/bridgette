@@ -1,14 +1,17 @@
 {
   "name": "bridgette",
   "version": "1.0.0",
-  "description": "",
+  "description": "Bridgette - Financial platform for dataset mapping",
   "main": "index.js",
   "scripts": {
-    "dev": "concurrently \"npx http-server frontend -p 3000 -o\" \"npx http-server frontend -p 3001 -o\" \"npx http-server frontend -p 3002 -o\" \"npx http-server frontend -p 3003 -o\" \"npx http-server frontend -p 3004 -o\"",
-    "dev:single": "npx http-server frontend -p 3005 -o",
+    "dev": "npx http-server frontend -p 3000 -o",
+    "dev:backend": "cd backend && python app.py",
+    "dev:frontend": "npx http-server frontend -p 3000 -o",
     "start": "npx http-server frontend -p 3001 -o",
     "build": "echo 'Static files are ready in frontend folder'",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "install:backend": "cd backend && pip install -r requirements.txt",
+    "start:full": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\""
   },
   "repository": {
     "type": "git",

@@ -53,7 +53,7 @@
         <section id="upload" class="upload">
             <div class="container">
                 <h2>Upload Your Files</h2>
-                <p>Upload your banking spreadsheets and data files to get started with dataset mapping</p>
+                <p>Upload files (.csv or .xlsx format) to process and view the first three lines of each file</p>
                 
                 <div class="upload-area">
                     <div class="upload-box" id="uploadBox">
@@ -62,7 +62,7 @@
                         </div>
                         <h3>Drag & Drop Your Files Here</h3>
                         <p>or click to browse</p>
-                        <input type="file" id="fileInput" multiple accept=".csv,.xlsx,.xls,.json" style="display: none;">
+                        <input type="file" id="fileInput" multiple accept=".csv,.xlsx,.xls" style="display: none;">
                         <button class="upload-btn" onclick="document.getElementById('fileInput').click()">Choose Files</button>
                     </div>
                     
@@ -82,9 +82,8 @@
                     <div class="file-types">
                         <span class="file-type">CSV</span>
                         <span class="file-type">Excel (.xlsx, .xls)</span>
-                        <span class="file-type">JSON</span>
                     </div>
-                    <p class="upload-note">Maximum file size: 10MB per file</p>
+                    <p class="upload-note">Upload any number of files • Maximum file size: 10MB per file</p>
                 </div>
             </div>
         </section>

@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  backend:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_DEBUG=true
+      - FLASK_HOST=0.0.0.0
+      - PORT=5000
+    volumes:
+      - ./backend:/app
+      - ./frontend:/app/frontend
+    command: python app.py
+
+  frontend:
+    image: node:18-alpine
+    working_dir: /app
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+    command: sh -c "npm install -g http-server && http-server -p 3000 -o"
+    depends_on:
+      - backend

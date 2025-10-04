@@ -1,4 +1,7 @@
-// Smooth scrolling for navigation links
+// Configuration - Backend URL based on environment
+const BACKEND_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
+    ? 'http://localhost:5000' 
+    : window.location.origin.replace('3000', '5000').replace('3001', '5000').replace('3005', '5000');
 document.addEventListener('DOMContentLoaded', function() {
     // Add smooth scrolling to all anchor links
     const links = document.querySelectorAll('a[href^="#"]');
@@ -227,11 +230,11 @@ function handleFiles(files) {
         }
         
         // Check file type
-        const allowedTypes = ['.csv', '.xlsx', '.xls', '.json'];
+        const allowedTypes = ['.csv', '.xlsx', '.xls'];
         const fileExtension = '.' + file.name.split('.').pop().toLowerCase();
         
         if (!allowedTypes.includes(fileExtension)) {
-            alert(`File "${file.name}" is not supported. Please upload CSV, Excel, or JSON files.`);
+            alert(`File "${file.name}" is not supported. Please upload CSV or Excel files only.`);
             return;
         }
         
@@ -290,7 +293,8 @@ function processFiles() {
         return;
     }
     
-    // Simulate file processing
+    // No file count restriction - can upload any number of files
+    
     const processBtn = document.querySelector('.process-btn');
     if (!processBtn) return;
     
@@ -299,14 +303,127 @@ function processFiles() {
     processBtn.textContent = 'Processing...';
     processBtn.disabled = true;
     
-    setTimeout(() => {
-        alert(`Successfully processed ${selectedFiles.length} file(s)! Your data mapping analysis will be ready shortly.`);
+    // Create FormData to send files to backend
+    const formData = new FormData();
+    selectedFiles.forEach(file => {
+        formData.append('files', file);
+    });
+    
+    // Send files to backend
+    fetch(`${BACKEND_URL}/api/process-files`, {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('DEBUG: Received data:', data);  // Debug log
+        if (data.success) {
+            // Display results
+            showResults(data.results, data.file_count);
+        } else {
+            alert(`Error: ${data.error}`);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Error processing files. Please make sure the backend server is running.');
+    })
+    .finally(() => {
         processBtn.textContent = originalText;
         processBtn.disabled = false;
+    });
+}
+
+function showResults(results, fileCount) {
+    console.log('DEBUG: showResults called with:', results, fileCount);  // Debug log
+    
+    // Create a modal or display area for results
+    const modal = document.createElement('div');
+    modal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 10000;
+    `;
+    
+    const modalContent = document.createElement('div');
+    modalContent.style.cssText = `
+        background: white;
+        padding: 2rem;
+        border-radius: 15px;
+        max-width: 90%;
+        max-height: 90%;
+        overflow-y: auto;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    `;
+    
+    // Build the results HTML
+    let resultsHTML = `
+        <div style="text-align: center; margin-bottom: 2rem;">
+            <h3 style="color: #333; margin-bottom: 0.5rem;">File Processing Results</h3>
+            <p style="color: #666;">Processed ${fileCount} file(s)</p>
+        </div>
+    `;
+    
+    results.forEach((result, index) => {
+        const fileColor = result.error ? '#dc3545' : '#28a745';
+        resultsHTML += `
+            <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 10px; margin-bottom: 1.5rem; border-left: 4px solid ${fileColor};">
+                <h4 style="color: #333; margin-bottom: 1rem; display: flex; align-items: center;">
+                    <span style="background: ${fileColor}; color: white; padding: 4px 8px; border-radius: 4px; margin-right: 10px; font-size: 0.8rem;">File ${index + 1}</span>
+                    ${result.filename}
+                </h4>
+                <div style="background: white; padding: 1rem; border-radius: 8px;">
+                    <h5 style="color: #666; margin-bottom: 0.5rem;">First Three Lines:</h5>
+        `;
         
-        // Clear files after processing
-        clearFiles();
-    }, 2000);
+        if (result.error) {
+            resultsHTML += `<p style="color: #dc3545; font-style: italic;">${result.lines[0]}</p>`;
+        } else {
+            result.lines.forEach((line, lineIndex) => {
+                resultsHTML += `
+                    <div style="margin-bottom: 0.5rem; padding: 0.5rem; background: #e9ecef; border-radius: 4px;">
+                        <strong style="color: #667eea;">Line ${lineIndex + 1}:</strong> 
+                        <span style="color: #333; word-wrap: break-word;">${line}</span>
+                    </div>
+                `;
+            });
+        }
+        
+        resultsHTML += `
+                </div>
+            </div>
+        `;
+    });
+    
+    resultsHTML += `
+        <div style="text-align: center;">
+            <button onclick="this.closest('.modal').remove()" style="
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                color: white;
+                padding: 12px 24px;
+                border: none;
+                border-radius: 25px;
+                font-size: 1rem;
+                font-weight: 600;
+                cursor: pointer;
+            ">Close</button>
+        </div>
+    `;
+    
+    modalContent.innerHTML = resultsHTML;
+    modal.className = 'modal';
+    modal.appendChild(modalContent);
+    document.body.appendChild(modal);
+    
+    // Clear files after showing results
+    clearFiles();
 }
 
 function formatFileSize(bytes) {
