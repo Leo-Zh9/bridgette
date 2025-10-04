@@ -1,5 +1,9 @@
 // Configuration - Backend URL based on environment
-const BACKEND_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
+const isLocal = window.location.hostname === 'localhost' || 
+                window.location.hostname === '127.0.0.1' ||
+                window.location.hostname === '0.0.0.0';
+
+const BACKEND_URL = isLocal 
     ? 'http://localhost:5000' 
     : window.location.origin;
 document.addEventListener('DOMContentLoaded', function() {

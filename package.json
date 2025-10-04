@@ -11,7 +11,10 @@
     "build": "echo 'Static files are ready in frontend folder'",
     "test": "echo \"Error: no test specified\" && exit 1",
     "install:backend": "cd backend && pip install -r requirements.txt",
-    "start:full": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\""
+    "start:full": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "start:production": "cd backend && gunicorn --bind 0.0.0.0:$PORT app:app",
+    "deploy:render": "echo 'Deploy to Render with: cd backend && gunicorn --bind 0.0.0.0:$PORT app:app'",
+    "deploy:railway": "echo 'Deploy to Railway with: gunicorn --bind 0.0.0.0:$PORT app:app'"
   },
   "repository": {
     "type": "git",

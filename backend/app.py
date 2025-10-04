@@ -5,16 +5,12 @@ import pandas as pd
 import tempfile
 
 app = Flask(__name__)
-CORS(app)  # Enable CORS for frontend communication
+CORS(app)  # Enable CORS for all origins (production-ready)
 
 # Environment configuration
 app.config['DEBUG'] = os.environ.get('FLASK_DEBUG', 'False').lower() == 'true'
 app.config['HOST'] = os.environ.get('FLASK_HOST', '0.0.0.0')
-app.config['PORT'] = int(os.environ.get('PORT', 5000))
-
-# Configuration
-ALLOWED_EXTENSIONS = {'csv', 'xlsx', 'xls'}
-MAX_FILE_SIZE = 10 * 1024 * 1024  # 10MB
+app.config['PORT'] = int(os.environ.get('PORT', 5000))  # Dynamic port for production
 
 # Configuration
 ALLOWED_EXTENSIONS = {'csv', 'xlsx', 'xls'}
@@ -144,4 +140,5 @@ if __name__ == '__main__':
     print("  POST /api/process-files - Process uploaded files (any number)")
     print("  GET  /api/health - Health check")
     print("Supported formats: CSV, Excel (.xlsx, .xls)")
+    print(f"Environment: {'Development' if app.config['DEBUG'] else 'Production'}")
     app.run(debug=app.config['DEBUG'], host=app.config['HOST'], port=app.config['PORT'])

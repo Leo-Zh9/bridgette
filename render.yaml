@@ -1,0 +1,13 @@
+# Render deployment configuration
+services:
+  - type: web
+    name: bridgette-backend
+    env: python
+    buildCommand: pip install -r backend/requirements.txt
+    startCommand: cd backend && gunicorn --bind 0.0.0.0:$PORT app:app
+    healthCheckPath: /api/health
+    envVars:
+      - key: FLASK_DEBUG
+        value: false
+      - key: FLASK_HOST
+        value: 0.0.0.0
