@@ -189,11 +189,24 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // File upload functionality
-let selectedFiles = [];
+let selectedFiles1 = [];
+let selectedFiles2 = [];
+let selectedSchemaFiles1 = [];
+let selectedSchemaFiles2 = [];
 
 function initializeFileUpload() {
-    const uploadBox = document.getElementById('uploadBox');
-    const fileInput = document.getElementById('fileInput');
+    // Initialize regular upload boxes
+    initializeUploadBox(1);
+    initializeUploadBox(2);
+    
+    // Initialize schema upload boxes
+    initializeSchemaUploadBox(1);
+    initializeSchemaUploadBox(2);
+}
+
+function initializeUploadBox(boxNumber) {
+    const uploadBox = document.getElementById(`uploadBox${boxNumber}`);
+    const fileInput = document.getElementById(`fileInput${boxNumber}`);
     
     if (!uploadBox || !fileInput) return;
     
@@ -204,7 +217,7 @@ function initializeFileUpload() {
     
     // File input change
     fileInput.addEventListener('change', function(e) {
-        handleFiles(e.target.files);
+        handleFiles(e.target.files, boxNumber);
     });
     
     // Drag and drop functionality
@@ -221,11 +234,47 @@ function initializeFileUpload() {
     uploadBox.addEventListener('drop', function(e) {
         e.preventDefault();
         uploadBox.classList.remove('dragover');
-        handleFiles(e.dataTransfer.files);
+        handleFiles(e.dataTransfer.files, boxNumber);
     });
 }
 
-function handleFiles(files) {
+function initializeSchemaUploadBox(boxNumber) {
+    const uploadBox = document.getElementById(`schemaUploadBox${boxNumber}`);
+    const fileInput = document.getElementById(`schemaFileInput${boxNumber}`);
+    
+    if (!uploadBox || !fileInput) return;
+    
+    // Click to upload
+    uploadBox.addEventListener('click', function() {
+        fileInput.click();
+    });
+    
+    // File input change
+    fileInput.addEventListener('change', function(e) {
+        handleSchemaFiles(e.target.files, boxNumber);
+    });
+    
+    // Drag and drop functionality
+    uploadBox.addEventListener('dragover', function(e) {
+        e.preventDefault();
+        uploadBox.classList.add('dragover');
+    });
+    
+    uploadBox.addEventListener('dragleave', function(e) {
+        e.preventDefault();
+        uploadBox.classList.remove('dragover');
+    });
+    
+    uploadBox.addEventListener('drop', function(e) {
+        e.preventDefault();
+        uploadBox.classList.remove('dragover');
+        handleSchemaFiles(e.dataTransfer.files, boxNumber);
+    });
+}
+
+function handleFiles(files, boxNumber) {
+    const selectedFiles = boxNumber === 1 ? selectedFiles1 : selectedFiles2;
+    
     Array.from(files).forEach(file => {
         // Check file size (50MB limit)
         if (file.size > 50 * 1024 * 1024) {
@@ -246,13 +295,40 @@ function handleFiles(files) {
         selectedFiles.push(file);
     });
     
-    updateFileList();
+    updateFileList(boxNumber);
 }
 
-function updateFileList() {
-    const fileList = document.getElementById('fileList');
-    const fileItems = document.getElementById('fileItems');
-    const uploadActions = document.getElementById('uploadActions');
+function handleSchemaFiles(files, boxNumber) {
+    const selectedFiles = boxNumber === 1 ? selectedSchemaFiles1 : selectedSchemaFiles2;
+    
+    Array.from(files).forEach(file => {
+        // Check file size (50MB limit)
+        if (file.size > 50 * 1024 * 1024) {
+            alert(`File "${file.name}" is too large. Maximum size is 50MB.`);
+            return;
+        }
+        
+        // Check file type
+        const allowedTypes = ['.csv', '.xlsx', '.xls'];
+        const fileExtension = '.' + file.name.split('.').pop().toLowerCase();
+        
+        if (!allowedTypes.includes(fileExtension)) {
+            alert(`File "${file.name}" is not supported. Please upload CSV or Excel files only.`);
+            return;
+        }
+        
+        // Add file to selected files
+        selectedFiles.push(file);
+    });
+    
+    updateSchemaFileList(boxNumber);
+}
+
+function updateFileList(boxNumber) {
+    const selectedFiles = boxNumber === 1 ? selectedFiles1 : selectedFiles2;
+    const fileList = document.getElementById(`fileList${boxNumber}`);
+    const fileItems = document.getElementById(`fileItems${boxNumber}`);
+    const uploadActions = document.getElementById(`uploadActions${boxNumber}`);
     
     if (!fileList || !fileItems || !uploadActions) return;
     
@@ -269,7 +345,7 @@ function updateFileList() {
                     <div class="file-name">${file.name}</div>
                     <div class="file-size">${formatFileSize(file.size)}</div>
                 </div>
-                <button class="remove-file" onclick="removeFile(${index})">×</button>
+                <button class="remove-file" onclick="removeFile(${index}, ${boxNumber})">×</button>
             `;
             fileItems.appendChild(li);
         });
@@ -279,19 +355,68 @@ function updateFileList() {
     }
 }
 
-function removeFile(index) {
-    selectedFiles.splice(index, 1);
-    updateFileList();
+function updateSchemaFileList(boxNumber) {
+    const selectedFiles = boxNumber === 1 ? selectedSchemaFiles1 : selectedSchemaFiles2;
+    const fileList = document.getElementById(`schemaFileList${boxNumber}`);
+    const fileItems = document.getElementById(`schemaFileItems${boxNumber}`);
+    const uploadActions = document.getElementById(`schemaUploadActions${boxNumber}`);
+    
+    if (!fileList || !fileItems || !uploadActions) return;
+    
+    if (selectedFiles.length > 0) {
+        fileList.style.display = 'block';
+        uploadActions.style.display = 'flex';
+        
+        fileItems.innerHTML = '';
+        selectedFiles.forEach((file, index) => {
+            const li = document.createElement('li');
+            li.className = 'file-item';
+            li.innerHTML = `
+                <div>
+                    <div class="file-name">${file.name}</div>
+                    <div class="file-size">${formatFileSize(file.size)}</div>
+                </div>
+                <button class="remove-file" onclick="removeSchemaFile(${index}, ${boxNumber})">×</button>
+            `;
+            fileItems.appendChild(li);
+        });
+    } else {
+        fileList.style.display = 'none';
+        uploadActions.style.display = 'none';
+    }
 }
 
-function clearFiles() {
-    selectedFiles = [];
-    updateFileList();
-    const fileInput = document.getElementById('fileInput');
+function removeFile(index, boxNumber) {
+    const selectedFiles = boxNumber === 1 ? selectedFiles1 : selectedFiles2;
+    selectedFiles.splice(index, 1);
+    updateFileList(boxNumber);
+}
+
+function clearFiles(boxNumber) {
+    const selectedFiles = boxNumber === 1 ? selectedFiles1 : selectedFiles2;
+    selectedFiles.length = 0; // Clear the array
+    updateFileList(boxNumber);
+    const fileInput = document.getElementById(`fileInput${boxNumber}`);
     if (fileInput) fileInput.value = '';
 }
 
-function processFiles() {
+function removeSchemaFile(index, boxNumber) {
+    const selectedFiles = boxNumber === 1 ? selectedSchemaFiles1 : selectedSchemaFiles2;
+    selectedFiles.splice(index, 1);
+    updateSchemaFileList(boxNumber);
+}
+
+function clearSchemaFiles(boxNumber) {
+    const selectedFiles = boxNumber === 1 ? selectedSchemaFiles1 : selectedSchemaFiles2;
+    selectedFiles.length = 0; // Clear the array
+    updateSchemaFileList(boxNumber);
+    const fileInput = document.getElementById(`schemaFileInput${boxNumber}`);
+    if (fileInput) fileInput.value = '';
+}
+
+function processFiles(boxNumber) {
+    const selectedFiles = boxNumber === 1 ? selectedFiles1 : selectedFiles2;
+    
     if (selectedFiles.length === 0) {
         alert('Please select files to process.');
         return;
@@ -299,7 +424,7 @@ function processFiles() {
     
     // No file count restriction - can upload any number of files
     
-    const processBtn = document.querySelector('.process-btn');
+    const processBtn = document.querySelector(`#uploadActions${boxNumber} .process-btn`);
     if (!processBtn) return;
     
     const originalText = processBtn.textContent;
@@ -323,7 +448,7 @@ function processFiles() {
         console.log('DEBUG: Received data:', data);  // Debug log
         if (data.success) {
             // Display results
-            showResults(data.results, data.file_count);
+            showResults(data.results, data.file_count, boxNumber);
         } else {
             alert(`Error: ${data.error}`);
         }
@@ -338,8 +463,55 @@ function processFiles() {
     });
 }
 
-function showResults(results, fileCount) {
-    console.log('DEBUG: showResults called with:', results, fileCount);  // Debug log
+function processSchemaFiles(boxNumber) {
+    const selectedFiles = boxNumber === 1 ? selectedSchemaFiles1 : selectedSchemaFiles2;
+    
+    if (selectedFiles.length === 0) {
+        alert('Please select schema files to process.');
+        return;
+    }
+    
+    const processBtn = document.querySelector(`#schemaUploadActions${boxNumber} .process-btn`);
+    if (!processBtn) return;
+    
+    const originalText = processBtn.textContent;
+    
+    processBtn.textContent = 'Processing...';
+    processBtn.disabled = true;
+    
+    // Create FormData to send files to backend
+    const formData = new FormData();
+    selectedFiles.forEach(file => {
+        formData.append('files', file);
+    });
+    
+    // Send files to backend with schema flag
+    fetch(`${BACKEND_URL}/api/process-files?schema=true`, {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('DEBUG: Received schema data:', data);  // Debug log
+        if (data.success) {
+            // Display results
+            showSchemaResults(data.results, data.file_count, boxNumber);
+        } else {
+            alert(`Error: ${data.error}`);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Error processing schema files. Please make sure the backend server is running.');
+    })
+    .finally(() => {
+        processBtn.textContent = originalText;
+        processBtn.disabled = false;
+    });
+}
+
+function showResults(results, fileCount, boxNumber) {
+    console.log('DEBUG: showResults called with:', results, fileCount, boxNumber);  // Debug log
     
     // Create a modal or display area for results
     const modal = document.createElement('div');
@@ -370,7 +542,7 @@ function showResults(results, fileCount) {
     // Build the results HTML
     let resultsHTML = `
         <div style="text-align: center; margin-bottom: 2rem;">
-            <h3 style="color: #333; margin-bottom: 0.5rem;">File Processing Results</h3>
+            <h3 style="color: #333; margin-bottom: 0.5rem;">File Processing Results - Upload Box ${boxNumber}</h3>
             <p style="color: #666;">Processed ${fileCount} file(s)</p>
         </div>
     `;
@@ -388,9 +560,9 @@ function showResults(results, fileCount) {
         `;
         
         if (result.error) {
-            resultsHTML += `<p style="color: #dc3545; font-style: italic;">${result.lines[0]}</p>`;
+            resultsHTML += `<p style="color: #dc3545; font-style: italic;">${result.data.single_tab.lines[0]}</p>`;
         } else {
-            result.lines.forEach((line, lineIndex) => {
+            result.data.single_tab.lines.forEach((line, lineIndex) => {
                 resultsHTML += `
                     <div style="margin-bottom: 0.5rem; padding: 0.5rem; background: #e9ecef; border-radius: 4px;">
                         <strong style="color: #667eea;">Line ${lineIndex + 1}:</strong> 
@@ -427,7 +599,135 @@ function showResults(results, fileCount) {
     document.body.appendChild(modal);
     
     // Clear files after showing results
-    clearFiles();
+    clearFiles(boxNumber);
+}
+
+function showSchemaResults(results, fileCount, boxNumber) {
+    console.log('DEBUG: showSchemaResults called with:', results, fileCount, boxNumber);  // Debug log
+    
+    // Create a modal or display area for results
+    const modal = document.createElement('div');
+    modal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 10000;
+    `;
+    
+    const modalContent = document.createElement('div');
+    modalContent.style.cssText = `
+        background: white;
+        padding: 2rem;
+        border-radius: 15px;
+        max-width: 90%;
+        max-height: 90%;
+        overflow-y: auto;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    `;
+    
+    // Build the results HTML
+    let resultsHTML = `
+        <div style="text-align: center; margin-bottom: 2rem;">
+            <h3 style="color: #28a745; margin-bottom: 0.5rem;">Schema Processing Results - Schema Box ${boxNumber}</h3>
+            <p style="color: #666;">Processed ${fileCount} schema file(s) (starting from line 5)</p>
+        </div>
+    `;
+    
+    results.forEach((result, index) => {
+        const fileColor = result.error ? '#dc3545' : '#28a745';
+        resultsHTML += `
+            <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 10px; margin-bottom: 1.5rem; border-left: 4px solid ${fileColor};">
+                <h4 style="color: #333; margin-bottom: 1rem; display: flex; align-items: center;">
+                    <span style="background: ${fileColor}; color: white; padding: 4px 8px; border-radius: 4px; margin-right: 10px; font-size: 0.8rem;">Schema ${index + 1}</span>
+                    ${result.filename}
+                </h4>
+        `;
+        
+        if (result.error) {
+            resultsHTML += `
+                <div style="background: white; padding: 1rem; border-radius: 8px;">
+                    <p style="color: #dc3545; font-style: italic;">${result.data.single_tab.lines[0]}</p>
+                </div>
+            `;
+        } else {
+            // Check if it's a multi-tab Excel file or single tab
+            if (result.data.multiple_tabs) {
+                // Multi-tab Excel file
+                resultsHTML += `<h5 style="color: #666; margin-bottom: 1rem;">Multiple Tabs Found:</h5>`;
+                
+                Object.entries(result.data.multiple_tabs).forEach(([tabName, tabData]) => {
+                    resultsHTML += `
+                        <div style="background: white; padding: 1rem; border-radius: 8px; margin-bottom: 1rem; border: 1px solid #dee2e6;">
+                            <h6 style="color: #28a745; margin-bottom: 0.5rem; font-weight: bold;">📋 ${tabData.title}</h6>
+                            <p style="color: #666; font-size: 0.9rem; margin-bottom: 0.5rem;">Tab: ${tabName}</p>
+                            <div style="margin-top: 0.5rem;">
+                    `;
+                    
+                    tabData.lines.forEach((line, lineIndex) => {
+                        resultsHTML += `
+                            <div style="margin-bottom: 0.3rem; padding: 0.3rem 0.5rem; background: #e9ecef; border-radius: 3px; font-size: 0.9rem;">
+                                <strong style="color: #28a745;">Line ${lineIndex + 5}:</strong> 
+                                <span style="color: #333; word-wrap: break-word;">${line}</span>
+                            </div>
+                        `;
+                    });
+                    
+                    resultsHTML += `
+                            </div>
+                        </div>
+                    `;
+                });
+            } else {
+                // Single tab file (CSV or single Excel sheet)
+                resultsHTML += `
+                    <div style="background: white; padding: 1rem; border-radius: 8px;">
+                        <h5 style="color: #666; margin-bottom: 0.5rem;">First Three Lines (from line 5):</h5>
+                `;
+                
+                result.data.single_tab.lines.forEach((line, lineIndex) => {
+                    resultsHTML += `
+                        <div style="margin-bottom: 0.5rem; padding: 0.5rem; background: #e9ecef; border-radius: 4px;">
+                            <strong style="color: #28a745;">Line ${lineIndex + 5}:</strong> 
+                            <span style="color: #333; word-wrap: break-word;">${line}</span>
+                        </div>
+                    `;
+                });
+                
+                resultsHTML += `</div>`;
+            }
+        }
+        
+        resultsHTML += `</div>`;
+    });
+    
+    resultsHTML += `
+        <div style="text-align: center;">
+            <button onclick="this.closest('.modal').remove()" style="
+                background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+                color: white;
+                padding: 12px 24px;
+                border: none;
+                border-radius: 25px;
+                font-size: 1rem;
+                font-weight: 600;
+                cursor: pointer;
+            ">Close</button>
+        </div>
+    `;
+    
+    modalContent.innerHTML = resultsHTML;
+    modal.className = 'modal';
+    modal.appendChild(modalContent);
+    document.body.appendChild(modal);
+    
+    // Clear schema files after showing results
+    clearSchemaFiles(boxNumber);
 }
 
 function formatFileSize(bytes) {

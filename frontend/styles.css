@@ -180,6 +180,36 @@ header {
     scroll-margin-top: 80px;
 }
 
+/* Schema and Data Sections */
+.schema-section, .data-section {
+    margin-bottom: 4rem;
+}
+
+.schema-title, .data-title {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.schema-description, .data-description {
+    text-align: center;
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.schema-title {
+    color: #28a745; /* Green for schema */
+}
+
+.data-title {
+    color: #667eea; /* Blue for regular data */
+}
+
 .upload h2 {
     text-align: center;
     font-size: 2.5rem;
@@ -197,9 +227,29 @@ header {
     margin-right: auto;
 }
 
-.upload-area {
-    max-width: 800px;
+.upload-areas {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    max-width: 1200px;
     margin: 0 auto;
+}
+
+.upload-area {
+    background: #f8f9fa;
+    border-radius: 15px;
+    padding: 2rem;
+    border: 2px solid #e9ecef;
+}
+
+.upload-area-title {
+    text-align: center;
+    color: #667eea;
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #e9ecef;
 }
 
 .upload-box {
@@ -483,6 +533,11 @@ footer {
     
     .services-grid {
         grid-template-columns: 1fr;
+    }
+    
+    .upload-areas {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
     }
 }
 

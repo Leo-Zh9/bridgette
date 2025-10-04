@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bridgette - Welcome</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=4">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
@@ -55,26 +55,116 @@
                 <h2>Upload Your Files</h2>
                 <p>Upload files (.csv or .xlsx format) to process and view the first three lines of each file</p>
                 
-                <div class="upload-area">
-                    <div class="upload-box" id="uploadBox">
-                        <div class="upload-icon">
-                            <i class="fas fa-cloud-upload-alt"></i>
+                <!-- Bank Schema Upload Boxes -->
+                <div class="schema-section">
+                    <h3 class="schema-title">Bank Schema Files</h3>
+                    <p class="schema-description">Upload bank schema files (starts from line 5 with headers)</p>
+                    
+                    <div class="upload-areas">
+                        <!-- First Schema Upload Box -->
+                        <div class="upload-area">
+                            <h3 class="upload-area-title">Schema Box 1</h3>
+                            <div class="upload-box" id="schemaUploadBox1">
+                                <div class="upload-icon">
+                                    <i class="fas fa-database"></i>
+                                </div>
+                                <h3>Drag & Drop Schema Files Here</h3>
+                                <p>or click to browse</p>
+                                <input type="file" id="schemaFileInput1" multiple accept=".csv,.xlsx,.xls" style="display: none;">
+                                <button class="upload-btn" onclick="document.getElementById('schemaFileInput1').click()">Choose Schema Files</button>
+                            </div>
+                            
+                            <div class="file-list" id="schemaFileList1" style="display: none;">
+                                <h4>Selected Schema Files:</h4>
+                                <ul id="schemaFileItems1"></ul>
+                            </div>
+                            
+                            <div class="upload-actions" id="schemaUploadActions1" style="display: none;">
+                                <button class="process-btn" onclick="processSchemaFiles(1)">Process Schema Files</button>
+                                <button class="clear-btn" onclick="clearSchemaFiles(1)">Clear All</button>
+                            </div>
                         </div>
-                        <h3>Drag & Drop Your Files Here</h3>
-                        <p>or click to browse</p>
-                        <input type="file" id="fileInput" multiple accept=".csv,.xlsx,.xls" style="display: none;">
-                        <button class="upload-btn" onclick="document.getElementById('fileInput').click()">Choose Files</button>
+                        
+                        <!-- Second Schema Upload Box -->
+                        <div class="upload-area">
+                            <h3 class="upload-area-title">Schema Box 2</h3>
+                            <div class="upload-box" id="schemaUploadBox2">
+                                <div class="upload-icon">
+                                    <i class="fas fa-database"></i>
+                                </div>
+                                <h3>Drag & Drop Schema Files Here</h3>
+                                <p>or click to browse</p>
+                                <input type="file" id="schemaFileInput2" multiple accept=".csv,.xlsx,.xls" style="display: none;">
+                                <button class="upload-btn" onclick="document.getElementById('schemaFileInput2').click()">Choose Schema Files</button>
+                            </div>
+                            
+                            <div class="file-list" id="schemaFileList2" style="display: none;">
+                                <h4>Selected Schema Files:</h4>
+                                <ul id="schemaFileItems2"></ul>
+                            </div>
+                            
+                            <div class="upload-actions" id="schemaUploadActions2" style="display: none;">
+                                <button class="process-btn" onclick="processSchemaFiles(2)">Process Schema Files</button>
+                                <button class="clear-btn" onclick="clearSchemaFiles(2)">Clear All</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Regular Data Upload Boxes -->
+                <div class="data-section">
+                    <h3 class="data-title">Regular Data Files</h3>
+                    <p class="data-description">Upload regular data files (starts from line 1 with headers)</p>
+                    
+                    <div class="upload-areas">
+                    <!-- First Upload Box -->
+                    <div class="upload-area">
+                        <h3 class="upload-area-title">Upload Box 1</h3>
+                        <div class="upload-box" id="uploadBox1">
+                            <div class="upload-icon">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                            </div>
+                            <h3>Drag & Drop Your Files Here</h3>
+                            <p>or click to browse</p>
+                            <input type="file" id="fileInput1" multiple accept=".csv,.xlsx,.xls" style="display: none;">
+                            <button class="upload-btn" onclick="document.getElementById('fileInput1').click()">Choose Files</button>
+                        </div>
+                        
+                        <div class="file-list" id="fileList1" style="display: none;">
+                            <h4>Selected Files:</h4>
+                            <ul id="fileItems1"></ul>
+                        </div>
+                        
+                        <div class="upload-actions" id="uploadActions1" style="display: none;">
+                            <button class="process-btn" onclick="processFiles(1)">Process Files</button>
+                            <button class="clear-btn" onclick="clearFiles(1)">Clear All</button>
+                        </div>
                     </div>
                     
-                    <div class="file-list" id="fileList" style="display: none;">
-                        <h4>Selected Files:</h4>
-                        <ul id="fileItems"></ul>
+                    <!-- Second Upload Box -->
+                    <div class="upload-area">
+                        <h3 class="upload-area-title">Upload Box 2</h3>
+                        <div class="upload-box" id="uploadBox2">
+                            <div class="upload-icon">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                            </div>
+                            <h3>Drag & Drop Your Files Here</h3>
+                            <p>or click to browse</p>
+                            <input type="file" id="fileInput2" multiple accept=".csv,.xlsx,.xls" style="display: none;">
+                            <button class="upload-btn" onclick="document.getElementById('fileInput2').click()">Choose Files</button>
+                        </div>
+                        
+                        <div class="file-list" id="fileList2" style="display: none;">
+                            <h4>Selected Files:</h4>
+                            <ul id="fileItems2"></ul>
+                        </div>
+                        
+                        <div class="upload-actions" id="uploadActions2" style="display: none;">
+                            <button class="process-btn" onclick="processFiles(2)">Process Files</button>
+                            <button class="clear-btn" onclick="clearFiles(2)">Clear All</button>
+                        </div>
                     </div>
-                    
-                    <div class="upload-actions" id="uploadActions" style="display: none;">
-                        <button class="process-btn" onclick="processFiles()">Process Files</button>
-                        <button class="clear-btn" onclick="clearFiles()">Clear All</button>
-                    </div>
+                </div>
                 </div>
                 
                 <div class="upload-info">
@@ -115,6 +205,6 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="script.js?v=4"></script>
 </body>
 </html>
