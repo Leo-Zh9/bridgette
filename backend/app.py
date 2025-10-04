@@ -14,7 +14,7 @@ app.config['PORT'] = int(os.environ.get('PORT', 5000))  # Dynamic port for produ
 
 # Configuration
 ALLOWED_EXTENSIONS = {'csv', 'xlsx', 'xls'}
-MAX_FILE_SIZE = 10 * 1024 * 1024  # 10MB
+MAX_FILE_SIZE = 50 * 1024 * 1024  # 50MB
 
 def allowed_file(filename):
     """Check if file extension is allowed"""
@@ -81,7 +81,7 @@ def process_files():
                 if file_size > MAX_FILE_SIZE:
                     results.append({
                         'filename': file.filename,
-                        'lines': [f"File too large (max 10MB)"],
+                        'lines': [f"File too large (max 50MB)"],
                         'error': True
                     })
                     continue

@@ -227,9 +227,9 @@ function initializeFileUpload() {
 
 function handleFiles(files) {
     Array.from(files).forEach(file => {
-        // Check file size (10MB limit)
-        if (file.size > 10 * 1024 * 1024) {
-            alert(`File "${file.name}" is too large. Maximum size is 10MB.`);
+        // Check file size (50MB limit)
+        if (file.size > 50 * 1024 * 1024) {
+            alert(`File "${file.name}" is too large. Maximum size is 50MB.`);
             return;
         }
         

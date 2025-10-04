@@ -108,7 +108,7 @@ docker run -p 5000:5000 bridgette
 
 - **CSV files** (.csv)
 - **Excel files** (.xlsx, .xls)
-- **Maximum file size**: 10MB per file
+- **Maximum file size**: 50MB per file
 - **Unlimited file count**: Upload any number of files
 
 ## Environment Variables
