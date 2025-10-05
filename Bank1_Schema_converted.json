@@ -1,0 +1,635 @@
+{
+  "Customer": [
+    {
+      "Customer": "phoneNumber",
+      "Unnamed: 1": "The phone number of the customer or prospect"
+    },
+    {
+      "Customer": "smsNumber",
+      "Unnamed: 1": "The mobile SMS number of the customer"
+    },
+    {
+      "Customer": "email",
+      "Unnamed: 1": "Email Identifier of the Customer"
+    },
+    {
+      "Customer": "street",
+      "Unnamed: 1": "Contains the street name of the customer or the property"
+    },
+    {
+      "Customer": "addressCity",
+      "Unnamed: 1": "The town and/or city component of the base address of a customer"
+    },
+    {
+      "Customer": "country",
+      "Unnamed: 1": "Identifies the country of the customer or a property or organization"
+    },
+    {
+      "Customer": "legalId",
+      "Unnamed: 1": "Unique reference number of the legal documents submitted as identification proof"
+    },
+    {
+      "Customer": "legalDocumentName",
+      "Unnamed: 1": "Name of the legal documents such as passport, driving licence etc., provided as identification proof"
+    },
+    {
+      "Customer": "legalIssueAuthorised",
+      "Unnamed: 1": "Authority who issued the legal document"
+    },
+    {
+      "Customer": "legalIssueCountry",
+      "Unnamed: 1": "Indicates the country where the authorized legal document is issued"
+    },
+    {
+      "Customer": "legalIssueDate",
+      "Unnamed: 1": "Date of Issue of the legal document"
+    },
+    {
+      "Customer": "legalExpiredDate",
+      "Unnamed: 1": "Expiry date of the legal document submitted as proof"
+    },
+    {
+      "Customer": "language",
+      "Unnamed: 1": "The language that the contents of the field are displayed in."
+    },
+    {
+      "Customer": "dateOfBirth",
+      "Unnamed: 1": "The date of birth of an individual customer"
+    },
+    {
+      "Customer": "customerStatus",
+      "Unnamed: 1": "The internal bank status of a customer"
+    },
+    {
+      "Customer": "accountOfficerId",
+      "Unnamed: 1": "The identifier of the department head or specific account officer responsible for the customer"
+    },
+    {
+      "Customer": "gender",
+      "Unnamed: 1": "Gender of the Individual Customer"
+    },
+    {
+      "Customer": "state",
+      "Unnamed: 1": "Represents a subdivision of a country such as province, state, region, country"
+    },
+    {
+      "Customer": "postCode",
+      "Unnamed: 1": "Identifies the address postal code for the customer or the property"
+    },
+    {
+      "Customer": "contactDate",
+      "Unnamed: 1": "Date that first contact was made with the Customer."
+    },
+    {
+      "Customer": "lastName",
+      "Unnamed: 1": "The last name of an individual customer"
+    },
+    {
+      "Customer": "givenName",
+      "Unnamed: 1": "Customer's given name"
+    },
+    {
+      "Customer": "customerType",
+      "Unnamed: 1": "Identifies the type of customers. Example Personal, Business, Corporate, etc."
+    },
+    {
+      "Customer": "customerId",
+      "Unnamed: 1": "Identifier of the customer"
+    }
+  ],
+  "CurSav Accounts": [
+    {
+      "Current/Savings Accounts": "accountId",
+      "Unnamed: 1": "Identifier of the account. Often referred to as the account number"
+    },
+    {
+      "Current/Savings Accounts": "displayName",
+      "Unnamed: 1": "Contains the name used for display or enrichment purposes"
+    },
+    {
+      "Current/Savings Accounts": "customerId",
+      "Unnamed: 1": "Identifier of the customer"
+    },
+    {
+      "Current/Savings Accounts": "customerRole",
+      "Unnamed: 1": "Indicates role of a customer for an arrangement"
+    },
+    {
+      "Current/Savings Accounts": "productId",
+      "Unnamed: 1": "Contains the unique identifier of the product"
+    },
+    {
+      "Current/Savings Accounts": "status",
+      "Unnamed: 1": "Specifies the status of the agreement"
+    },
+    {
+      "Current/Savings Accounts": "currency",
+      "Unnamed: 1": "Identifies the currency. E.g. USD"
+    },
+    {
+      "Current/Savings Accounts": "branch",
+      "Unnamed: 1": "Contains the branch name/code in which the business activity was performed"
+    },
+    {
+      "Current/Savings Accounts": "accountOpeningDate",
+      "Unnamed: 1": "Contains the opening date of the account"
+    },
+    {
+      "Current/Savings Accounts": "arrangementStartDate",
+      "Unnamed: 1": "Indicates the date on which the arrangement was created"
+    },
+    {
+      "Current/Savings Accounts": "availableBalance",
+      "Unnamed: 1": "Available balance of the account which is the projected balance"
+    },
+    {
+      "Current/Savings Accounts": "onlineActualBalance",
+      "Unnamed: 1": "Real-time balance including all authorised transactions"
+    },
+    {
+      "Current/Savings Accounts": "lockedAmount",
+      "Unnamed: 1": "Shows reserved amount for the underlying account"
+    },
+    {
+      "Current/Savings Accounts": "availableLimit",
+      "Unnamed: 1": "The portion of an allocated credit limit that is available"
+    },
+    {
+      "Current/Savings Accounts": "productDescription",
+      "Unnamed: 1": "Indicates the description of the Product"
+    },
+    {
+      "Current/Savings Accounts": "category",
+      "Unnamed: 1": "Indicates the account or contract product name"
+    }
+  ],
+  "Fixed Term Accounts": [
+    {
+      "Fixed Term Accounts": "accountId",
+      "Unnamed: 1": "Identifier of the account"
+    },
+    {
+      "Fixed Term Accounts": "accountTitles",
+      "Unnamed: 1": "Short title on an account"
+    },
+    {
+      "Fixed Term Accounts": "productId",
+      "Unnamed: 1": "Contains the unique identifier of the product"
+    },
+    {
+      "Fixed Term Accounts": "currency",
+      "Unnamed: 1": "Identifies the currency (e.g. USD"
+    },
+    {
+      "Fixed Term Accounts": "customerId",
+      "Unnamed: 1": "Identifier of the customer"
+    },
+    {
+      "Fixed Term Accounts": "customerRole",
+      "Unnamed: 1": "Indicates role of a customer for an arrangement"
+    },
+    {
+      "Fixed Term Accounts": "branch",
+      "Unnamed: 1": "Contains the branch name/code"
+    },
+    {
+      "Fixed Term Accounts": "reason",
+      "Unnamed: 1": "Contains the reason for performing the current activity"
+    },
+    {
+      "Fixed Term Accounts": "maturityDate",
+      "Unnamed: 1": "Indicates maturity date of the contract"
+    },
+    {
+      "Fixed Term Accounts": "arrangementEffectiveDate",
+      "Unnamed: 1": "It is a date on/upon which an account is considered to take effect"
+    },
+    {
+      "Fixed Term Accounts": "expiryDate",
+      "Unnamed: 1": "Indicates the date on which the arrangement expires"
+    },
+    {
+      "Fixed Term Accounts": "agentCustomerId",
+      "Unnamed: 1": "The id of the 3rd party who sold the product"
+    },
+    {
+      "Fixed Term Accounts": "expectedBalance",
+      "Unnamed: 1": "Indicates the amount expected to be deposited by the customer"
+    },
+    {
+      "Fixed Term Accounts": "currentBalance",
+      "Unnamed: 1": "An accounts availableBalance plus any authorized credit"
+    },
+    {
+      "Fixed Term Accounts": "accruedInterest",
+      "Unnamed: 1": "The amount of interest that has been accrued"
+    },
+    {
+      "Fixed Term Accounts": "jointCustomerName",
+      "Unnamed: 1": "Name of Joint Customer"
+    },
+    {
+      "Fixed Term Accounts": "category",
+      "Unnamed: 1": "Indicates the account or contract product name"
+    },
+    {
+      "Fixed Term Accounts": "interestRate",
+      "Unnamed: 1": "Identifies the bid rate of the related currency for the defined time period"
+    },
+    {
+      "Fixed Term Accounts": "interestStatement",
+      "Unnamed: 1": "Indicates the category of the interest statement (e.g. Monthly"
+    },
+    {
+      "Fixed Term Accounts": "status",
+      "Unnamed: 1": "Specifies the status of the agreement"
+    }
+  ],
+  "Loan Accounts": [
+    {
+      "Loan Accounts": "accountId",
+      "Unnamed: 1": "Identifier of the account"
+    },
+    {
+      "Loan Accounts": "accountName",
+      "Unnamed: 1": "Display name or short name of the account specified"
+    },
+    {
+      "Loan Accounts": "productId",
+      "Unnamed: 1": "Contains the unique identifier of the product"
+    },
+    {
+      "Loan Accounts": "currency",
+      "Unnamed: 1": "Identifies the currency (e.g. USD"
+    },
+    {
+      "Loan Accounts": "customerId",
+      "Unnamed: 1": "Contains the customer identifier"
+    },
+    {
+      "Loan Accounts": "customerRole",
+      "Unnamed: 1": "Indicates role of a customer for an arrangement"
+    },
+    {
+      "Loan Accounts": "branch",
+      "Unnamed: 1": "Contains the branch name/code"
+    },
+    {
+      "Loan Accounts": "reason",
+      "Unnamed: 1": "Contains the reason for performing the current activity"
+    },
+    {
+      "Loan Accounts": "maturityDate",
+      "Unnamed: 1": "Indicates maturity date of the contract"
+    },
+    {
+      "Loan Accounts": "arrangementEffectiveDate",
+      "Unnamed: 1": "It is a date on/upon which an account is considered to take effect"
+    },
+    {
+      "Loan Accounts": "expiryDate",
+      "Unnamed: 1": "Indicates the date on which the arrangement expires"
+    },
+    {
+      "Loan Accounts": "agentCustomerIds",
+      "Unnamed: 1": "The id of the 3rd party who sold the product"
+    },
+    {
+      "Loan Accounts": "loanBalance",
+      "Unnamed: 1": "Indicates the outstanding balance of the loan"
+    },
+    {
+      "Loan Accounts": "availableBalance",
+      "Unnamed: 1": "Available balance of the account"
+    },
+    {
+      "Loan Accounts": "loanInterestRate",
+      "Unnamed: 1": "Indicates the interest rate of the loan"
+    },
+    {
+      "Loan Accounts": "loanInterestType",
+      "Unnamed: 1": "Indicates the interest rate type (Fixed"
+    },
+    {
+      "Loan Accounts": "compoundType",
+      "Unnamed: 1": "Contains the frequency type of compound in loan"
+    },
+    {
+      "Loan Accounts": "effectiveRate",
+      "Unnamed: 1": "Indicates the actual interest rate applied for the account after adjustment/tier calculation"
+    },
+    {
+      "Loan Accounts": "gracePeriod",
+      "Unnamed: 1": "The grace period for loan repayment"
+    },
+    {
+      "Loan Accounts": "periodicPayment",
+      "Unnamed: 1": "The periodic payment value"
+    },
+    {
+      "Loan Accounts": "numberPayments",
+      "Unnamed: 1": "Specifies the number of coupon or interest payments in a year"
+    },
+    {
+      "Loan Accounts": "paymentFrequency",
+      "Unnamed: 1": "The frequency at which a payment is required to be generated"
+    },
+    {
+      "Loan Accounts": "fixedDaysOfMonth",
+      "Unnamed: 1": "The days of the month"
+    },
+    {
+      "Loan Accounts": "numberPayments",
+      "Unnamed: 1": "Specifies the number of coupon or interest payments in a year"
+    },
+    {
+      "Loan Accounts": "amortisationTerm",
+      "Unnamed: 1": "Indicates the amortisation term"
+    },
+    {
+      "Loan Accounts": "principalAmount",
+      "Unnamed: 1": "Specifies the price for the first leg of the repo contract in specified currency"
+    },
+    {
+      "Loan Accounts": "principalBalance",
+      "Unnamed: 1": "The principal balance due when pay off the account in a future date"
+    },
+    {
+      "Loan Accounts": "interestAmount",
+      "Unnamed: 1": "The accrued Interest due or accrued"
+    },
+    {
+      "Loan Accounts": "chargeAmount",
+      "Unnamed: 1": "Retrieves the charge amount after redeem"
+    },
+    {
+      "Loan Accounts": "interestBalance",
+      "Unnamed: 1": "The interest balance due when pay off the account in a future date"
+    },
+    {
+      "Loan Accounts": "interestFromArrearsBalance",
+      "Unnamed: 1": "The interest from arrears balance due when pay off the account in a future date"
+    },
+    {
+      "Loan Accounts": "loanBalance",
+      "Unnamed: 1": "Indicates the outstanding balance of the loan"
+    },
+    {
+      "Loan Accounts": "interestAmount",
+      "Unnamed: 1": "The accrued Interest due or accrued"
+    },
+    {
+      "Loan Accounts": "accountType",
+      "Unnamed: 1": "Groups the products based on their type"
+    }
+  ],
+  "CurSav Account Transactions": [
+    {
+      "Current/Savings  Transactions": "transactionReference",
+      "Unnamed: 1": "Contains the identifier for the transaction in the core system"
+    },
+    {
+      "Current/Savings  Transactions": "activity",
+      "Unnamed: 1": "the activity (e.g. CREDIT DEBIT FEE_APPLIED)"
+    },
+    {
+      "Current/Savings  Transactions": "transactionAmount",
+      "Unnamed: 1": "Contains the transaction amount"
+    },
+    {
+      "Current/Savings  Transactions": "currency",
+      "Unnamed: 1": "type of currency"
+    },
+    {
+      "Current/Savings  Transactions": "effectiveDate",
+      "Unnamed: 1": "Indicates the value date on which the underlying accounting entry is to be given value"
+    },
+    {
+      "Current/Savings  Transactions": "transactionDate",
+      "Unnamed: 1": "Contains the identifier for the transaction date"
+    },
+    {
+      "Current/Savings  Transactions": "bookingDate",
+      "Unnamed: 1": "Indicates the date on which this business activity is booked in the underlying system"
+    },
+    {
+      "Current/Savings  Transactions": "narrative",
+      "Unnamed: 1": "The additional text printed on descriptive statements in addition to the standard narrative and/or reference"
+    },
+    {
+      "Current/Savings  Transactions": "externalEventStatus",
+      "Unnamed: 1": "Determines the status of events sent to external system"
+    },
+    {
+      "Current/Savings  Transactions": "userRole",
+      "Unnamed: 1": "User who initiated the transaction"
+    },
+    {
+      "Current/Savings  Transactions": "branch",
+      "Unnamed: 1": "Contains the branch name/code"
+    },
+    {
+      "Current/Savings  Transactions": "accountId",
+      "Unnamed: 1": "Identifier of the account"
+    },
+    {
+      "Current/Savings  Transactions": "chargesPaymentTypeName",
+      "Unnamed: 1": "Indicates Payment type set to an account"
+    },
+    {
+      "Current/Savings  Transactions": "chargesPropertyName",
+      "Unnamed: 1": "Indicates the property description to which benefit has been applied"
+    },
+    {
+      "Current/Savings  Transactions": "chargesChargeAmount",
+      "Unnamed: 1": "The charges or fees for this transaction"
+    },
+    {
+      "Current/Savings  Transactions": "taxRate",
+      "Unnamed: 1": "Indicates tax charged to an account"
+    },
+    {
+      "Current/Savings  Transactions": "availableBalance",
+      "Unnamed: 1": "Available balance of the account"
+    },
+    {
+      "Current/Savings  Transactions": "lockedAmount",
+      "Unnamed: 1": "Shows reserved amount for the underlying account for a given balance reservation event"
+    },
+    {
+      "Current/Savings  Transactions": "approvedOverdraftLimit",
+      "Unnamed: 1": "Contains the approved overdraft limit"
+    },
+    {
+      "Current/Savings  Transactions": "accrualAmount",
+      "Unnamed: 1": "Indicates interest accumulated for an account for the defined time period"
+    },
+    {
+      "Current/Savings  Transactions": "effectiveRate",
+      "Unnamed: 1": "Indicates the actual interest rate applied for the account after adjustment/tier calculation"
+    },
+    {
+      "Current/Savings  Transactions": "availableOverdraftLimit",
+      "Unnamed: 1": "Contains the overdraft limit still available to be utilized"
+    },
+    {
+      "Current/Savings  Transactions": "channel",
+      "Unnamed: 1": "Contains the channel in which the activity was performed"
+    }
+  ],
+  "Fixed Term Account Transactions": [
+    {
+      "Fixed Term Transactions": "transactionReference",
+      "Unnamed: 1": "Contains the identifier for the transaction in the core system"
+    },
+    {
+      "Fixed Term Transactions": "activity",
+      "Unnamed: 1": "the activity (e.g. DEPOSIT WITHDRAWAL FEE_APPLIED)"
+    },
+    {
+      "Fixed Term Transactions": "transactionAmount",
+      "Unnamed: 1": "Contains the transaction amount"
+    },
+    {
+      "Fixed Term Transactions": "currency",
+      "Unnamed: 1": "Identifier of the currency"
+    },
+    {
+      "Fixed Term Transactions": "effectiveDate",
+      "Unnamed: 1": "Indicates the value date on which the underlying accounting entry is to be given value"
+    },
+    {
+      "Fixed Term Transactions": "transactionDate",
+      "Unnamed: 1": "Contains the identifier for the transaction date"
+    },
+    {
+      "Fixed Term Transactions": "reason",
+      "Unnamed: 1": "Contains the reason for performing the current activity"
+    },
+    {
+      "Fixed Term Transactions": "externalEventStatus",
+      "Unnamed: 1": "Determines the status of events sent to external system"
+    },
+    {
+      "Fixed Term Transactions": "userRole",
+      "Unnamed: 1": "User who initiated the transaction"
+    },
+    {
+      "Fixed Term Transactions": "branch",
+      "Unnamed: 1": "Contains the branch name/code"
+    },
+    {
+      "Fixed Term Transactions": "chargesChargeAmount",
+      "Unnamed: 1": "Retrieves the charge amount after redeem"
+    },
+    {
+      "Fixed Term Transactions": "interestAmount",
+      "Unnamed: 1": "Indicates the amount of interest for a payment type"
+    },
+    {
+      "Fixed Term Transactions": "taxRate",
+      "Unnamed: 1": "Indicates tax charged to an account"
+    },
+    {
+      "Fixed Term Transactions": "currentBalance",
+      "Unnamed: 1": "An accounts availableBalance plus any authorized credit and debit movements for the day plus forward movements minus funds in hold"
+    },
+    {
+      "Fixed Term Transactions": "interestRate",
+      "Unnamed: 1": "Identifies the bid rate of the related currency for the defined time period"
+    },
+    {
+      "Fixed Term Transactions": "channel",
+      "Unnamed: 1": "Contains the channel in which the activity was performed"
+    },
+    {
+      "Fixed Term Transactions": "accountId",
+      "Unnamed: 1": "Identifier of the account"
+    }
+  ],
+  "Loan Account Transactions": [
+    {
+      "Loan Transactions": "transactionReference",
+      "Unnamed: 1": "Contains the identifier for the transaction in the core system"
+    },
+    {
+      "Loan Transactions": "activity",
+      "Unnamed: 1": "Id of the activity (e.g. DISBURSEMENT,  REPAYMENT)"
+    },
+    {
+      "Loan Transactions": "transactionAmount",
+      "Unnamed: 1": "Contains the transaction amount"
+    },
+    {
+      "Loan Transactions": "currency",
+      "Unnamed: 1": "Identifier of the currency"
+    },
+    {
+      "Loan Transactions": "effectiveDate",
+      "Unnamed: 1": "Contains the identifier for the transaction date"
+    },
+    {
+      "Loan Transactions": "reason",
+      "Unnamed: 1": "Contains the reason for performing the current activity"
+    },
+    {
+      "Loan Transactions": "externalEventStatus",
+      "Unnamed: 1": "Determines the status of events sent to external system"
+    },
+    {
+      "Loan Transactions": "userRole",
+      "Unnamed: 1": "User who initiated the transaction"
+    },
+    {
+      "Loan Transactions": "branch",
+      "Unnamed: 1": "Contains the branch name/code"
+    },
+    {
+      "Loan Transactions": "principalAmount",
+      "Unnamed: 1": "Specifies the price for the first leg of the repo contract in specified currency"
+    },
+    {
+      "Loan Transactions": "interestAmount",
+      "Unnamed: 1": "The accrued Interest due or accrued"
+    },
+    {
+      "Loan Transactions": "chargeAmount",
+      "Unnamed: 1": "Retrieves the charge amount after redeem"
+    },
+    {
+      "Loan Transactions": "balanceAmount",
+      "Unnamed: 1": "Amount of the balance"
+    },
+    {
+      "Loan Transactions": "principalAmount",
+      "Unnamed: 1": "Specifies the price for the first leg of the repo contract in specified currency"
+    },
+    {
+      "Loan Transactions": "interestRate",
+      "Unnamed: 1": "Identifies the bid rate of the related currency for the defined time period"
+    },
+    {
+      "Loan Transactions": "channelName",
+      "Unnamed: 1": "Name of the (digital) channel registered by the Customer"
+    },
+    {
+      "Loan Transactions": "accountId",
+      "Unnamed: 1": "Identifier of the account"
+    }
+  ],
+  "_metadata": {
+    "file_type": ".XLSX",
+    "file_name": "Bank1_Schema.xlsx",
+    "sheets": [
+      "Customer",
+      "CurSav Accounts",
+      "Fixed Term Accounts",
+      "Loan Accounts",
+      "CurSav Account Transactions",
+      "Fixed Term Account Transactions",
+      "Loan Account Transactions"
+    ],
+    "sheet_count": 7,
+    "total_rows": 172
+  }
+}

@@ -1,0 +1,690 @@
+{
+  "matched_schemas": [
+    {
+      "bank1": {
+        "category": "Customer",
+        "schema": "phoneNumber"
+      },
+      "bank2": {
+        "category": "Customer",
+        "schema": "homePhone"
+      }
+    },
+    {
+      "bank1": {
+        "category": "Customer",
+        "schema": "smsNumber"
+      },
+      "bank2": {
+        "category": "Customer",
+        "schema": "mobilePhone"
+      }
+    },
+    {
+      "bank1": {
+        "category": "Customer",
+        "schema": "email"
+      },
+      "bank2": {
+        "category": "Customer",
+        "schema": "emailAddress"
+      }
+    },
+    {
+      "bank1": {
+        "category": "Customer",
+        "schema": "street"
+      },
+      "bank2": {
+        "category": "Addresses",
+        "schema": "line1"
+      }
+    },
+    {
+      "bank1": {
+        "category": "Customer",
+        "schema": "addressCity"
+      },
+      "bank2": {
+        "category": "Addresses",
+        "schema": "city"
+      }
+    },
+    {
+      "bank1": {
+        "category": "Customer",
+        "schema": "country"
+      },
+      "bank2": {
+        "category": "Addresses",
+        "schema": "country"
+      }
+    },
+    {
+      "bank1": {
+        "category": "Customer",
+        "schema": "legalId"
+      },
+      "bank2": {
+        "category": "Identifications",
+        "schema": "documentId"
+      }
+    },
+    {
+      "bank1": {
+        "category": "Customer",
+        "schema": "legalDocumentName"
+      },
+      "bank2": {
+        "category": "Identifications",
+        "schema": "documentType"
+      }
+    },
+    {
+      "bank1": {
+        "category": "Customer",
+        "schema": "legalIssueAuthorised"
+      },
+      "bank2": {
+        "category": "Identifications",
+        "schema": "issuingAuthority"
+      }
+    },
+    {
+      "bank1": {
+        "category": "Customer",
+        "schema": "legalIssueCountry"
+      },
+      "bank2": {
+        "category": "Identifications",
+        "schema": "issuingCountry"
+      }
+    },
+    {
+      "bank1": {
+        "category": "Customer",
+        "schema": "legalIssueDate"
+      },
+      "bank2": {
+        "category": "Identifications",
+        "schema": "issuingDate"
+      }
+    },
+    {
+      "bank1": {
+        "category": "Customer",
+        "schema": "legalExpiredDate"
+      },
+      "bank2": {
+        "category": "Identifications",
+        "schema": "validUntil"
+      }
+    },
+    {
+      "bank1": {
+        "category": "Customer",
+        "schema": "language"
+      },
+      "bank2": {
+        "category": "Customer",
+        "schema": "preferredLanguage"
+      }
+    },
+    {
+      "bank1": {
+        "category": "Customer",
+        "schema": "dateOfBirth"
+      },
+      "bank2": {
+        "category": "Customer",
+        "schema": "birthDate"
+      }
+    },
+    {
+      "bank1": {
+        "category": "Customer",
+        "schema": "customerStatus"
+      },
+      "bank2": {
+        "category": "Customer",
+        "schema": "state"
+      }
+    },
+    {
+      "bank1": {
+        "category": "Customer",
+        "schema": "gender"
+      },
+      "bank2": {
+        "category": "Customer",
+        "schema": "gender"
+      }
+    },
+    {
+      "bank1": {
+        "category": "Customer",
+        "schema": "state"
+      },
+      "bank2": {
+        "category": "Addresses",
+        "schema": "region"
+      }
+    },
+    {
+      "bank1": {
+        "category": "Customer",
+        "schema": "postCode"
+      },
+      "bank2": {
+        "category": "Addresses",
+        "schema": "postcode"
+      }
+    },
+    {
+      "bank1": {
+        "category": "Customer",
+        "schema": "lastName"
+      },
+      "bank2": {
+        "category": "Customer",
+        "schema": "lastName"
+      }
+    },
+    {
+      "bank1": {
+        "category": "Customer",
+        "schema": "givenName"
+      },
+      "bank2": {
+        "category": "Customer",
+        "schema": "firstName"
+      }
+    },
+    {
+      "bank1": {
+        "category": "Customer",
+        "schema": "customerType"
+      },
+      "bank2": {
+        "category": "Customer",
+        "schema": "clientType"
+      }
+    },
+    {
+      "bank1": {
+        "category": "Customer",
+        "schema": "customerId"
+      },
+      "bank2": {
+        "category": "Customer",
+        "schema": "id"
+      }
+    },
+    {
+      "bank1": {
+        "category": "CurSav Accounts",
+        "schema": "accountId"
+      },
+      "bank2": {
+        "category": "Deposit Accounts",
+        "schema": "id"
+      }
+    },
+    {
+      "bank1": {
+        "category": "CurSav Accounts",
+        "schema": "status"
+      },
+      "bank2": {
+        "category": "Deposit Accounts",
+        "schema": "accountState"
+      }
+    },
+    {
+      "bank1": {
+        "category": "CurSav Accounts",
+        "schema": "currency"
+      },
+      "bank2": {
+        "category": "Deposit Accounts",
+        "schema": "currencyCode"
+      }
+    },
+    {
+      "bank1": {
+        "category": "CurSav Accounts",
+        "schema": "branch"
+      },
+      "bank2": {
+        "category": "Deposit Accounts",
+        "schema": "assignedBranchKey"
+      }
+    },
+    {
+      "bank1": {
+        "category": "CurSav Accounts",
+        "schema": "accountOpeningDate"
+      },
+      "bank2": {
+        "category": "Deposit Accounts",
+        "schema": "creationDate"
+      }
+    },
+    {
+      "bank1": {
+        "category": "CurSav Accounts",
+        "schema": "availableBalance"
+      },
+      "bank2": {
+        "category": "Deposit Accounts",
+        "schema": "availableBalance"
+      }
+    },
+    {
+      "bank1": {
+        "category": "CurSav Accounts",
+        "schema": "productDescription"
+      },
+      "bank2": {
+        "category": "Deposit Accounts",
+        "schema": "productDescription"
+      }
+    },
+    {
+      "bank1": {
+        "category": "CurSav Accounts",
+        "schema": "category"
+      },
+      "bank2": {
+        "category": "Deposit Accounts",
+        "schema": "accountType"
+      }
+    },
+    {
+      "bank1": {
+        "category": "Fixed Term Accounts",
+        "schema": "accountId"
+      },
+      "bank2": {
+        "category": "Deposit Accounts",
+        "schema": "id"
+      }
+    },
+    {
+      "bank1": {
+        "category": "Fixed Term Accounts",
+        "schema": "currency"
+      },
+      "bank2": {
+        "category": "Deposit Accounts",
+        "schema": "currencyCode"
+      }
+    },
+    {
+      "bank1": {
+        "category": "Fixed Term Accounts",
+        "schema": "branch"
+      },
+      "bank2": {
+        "category": "Deposit Accounts",
+        "schema": "assignedBranchKey"
+      }
+    },
+    {
+      "bank1": {
+        "category": "Fixed Term Accounts",
+        "schema": "maturityDate"
+      },
+      "bank2": {
+        "category": "Deposit Accounts",
+        "schema": "maturityDate"
+      }
+    },
+    {
+      "bank1": {
+        "category": "Fixed Term Accounts",
+        "schema": "expectedBalance"
+      },
+      "bank2": {
+        "category": "Deposit Accounts",
+        "schema": "totalBalance"
+      }
+    },
+    {
+      "bank1": {
+        "category": "Fixed Term Accounts",
+        "schema": "category"
+      },
+      "bank2": {
+        "category": "Deposit Accounts",
+        "schema": "accountType"
+      }
+    },
+    {
+      "bank1": {
+        "category": "Fixed Term Accounts",
+        "schema": "interestRate"
+      },
+      "bank2": {
+        "category": "Deposit Accounts",
+        "schema": "interestRate"
+      }
+    },
+    {
+      "bank1": {
+        "category": "Loan Accounts",
+        "schema": "accountId"
+      },
+      "bank2": {
+        "category": "Loan Accounts",
+        "schema": "id"
+      }
+    },
+    {
+      "bank1": {
+        "category": "Loan Accounts",
+        "schema": "currency"
+      },
+      "bank2": {
+        "category": "Loan Accounts",
+        "schema": "currencyCode"
+      }
+    },
+    {
+      "bank1": {
+        "category": "Loan Accounts",
+        "schema": "branch"
+      },
+      "bank2": {
+        "category": "Loan Accounts",
+        "schema": "assignedBranchKey"
+      }
+    },
+    {
+      "bank1": {
+        "category": "Loan Accounts",
+        "schema": "maturityDate"
+      },
+      "bank2": {
+        "category": "Loan Accounts",
+        "schema": "maturityDate"
+      }
+    },
+    {
+      "bank1": {
+        "category": "Loan Accounts",
+        "schema": "availableBalance"
+      },
+      "bank2": {
+        "category": "Loan Accounts",
+        "schema": "availableBalance"
+      }
+    },
+    {
+      "bank1": {
+        "category": "Loan Accounts",
+        "schema": "loanInterestRate"
+      },
+      "bank2": {
+        "category": "Loan Accounts",
+        "schema": "interestRate"
+      }
+    },
+    {
+      "bank1": {
+        "category": "Loan Accounts",
+        "schema": "gracePeriod"
+      },
+      "bank2": {
+        "category": "Loan Accounts",
+        "schema": "gracePeriod"
+      }
+    },
+    {
+      "bank1": {
+        "category": "Loan Accounts",
+        "schema": "periodicPayment"
+      },
+      "bank2": {
+        "category": "Loan Accounts",
+        "schema": "periodicPayment"
+      }
+    },
+    {
+      "bank1": {
+        "category": "Loan Accounts",
+        "schema": "fixedDaysOfMonth"
+      },
+      "bank2": {
+        "category": "Loan Accounts",
+        "schema": "fixedDaysOfMonth"
+      }
+    },
+    {
+      "bank1": {
+        "category": "Loan Accounts",
+        "schema": "principalBalance"
+      },
+      "bank2": {
+        "category": "Loan Accounts",
+        "schema": "principalBalance"
+      }
+    },
+    {
+      "bank1": {
+        "category": "Loan Accounts",
+        "schema": "interestBalance"
+      },
+      "bank2": {
+        "category": "Loan Accounts",
+        "schema": "interestBalance"
+      }
+    },
+    {
+      "bank1": {
+        "category": "Loan Accounts",
+        "schema": "interestFromArrearsBalance"
+      },
+      "bank2": {
+        "category": "Loan Accounts",
+        "schema": "interestFromArrearsBalance"
+      }
+    },
+    {
+      "bank1": {
+        "category": "CurSav Account Transactions",
+        "schema": "transactionReference"
+      },
+      "bank2": {
+        "category": "Deposit Account Transactions",
+        "schema": "id"
+      }
+    },
+    {
+      "bank1": {
+        "category": "CurSav Account Transactions",
+        "schema": "transactionAmount"
+      },
+      "bank2": {
+        "category": "Deposit Account Transactions",
+        "schema": "amount"
+      }
+    },
+    {
+      "bank1": {
+        "category": "CurSav Account Transactions",
+        "schema": "currency"
+      },
+      "bank2": {
+        "category": "Deposit Account Transactions",
+        "schema": "currencyCode"
+      }
+    },
+    {
+      "bank1": {
+        "category": "CurSav Account Transactions",
+        "schema": "transactionDate"
+      },
+      "bank2": {
+        "category": "Deposit Account Transactions",
+        "schema": "creationDate"
+      }
+    },
+    {
+      "bank1": {
+        "category": "CurSav Account Transactions",
+        "schema": "availableBalance"
+      },
+      "bank2": {
+        "category": "Deposit Account Transactions",
+        "schema": "availableBalance"
+      }
+    },
+    {
+      "bank1": {
+        "category": "CurSav Account Transactions",
+        "schema": "lockedAmount"
+      },
+      "bank2": {
+        "category": "Deposit Account Transactions",
+        "schema": "lockedBalance"
+      }
+    },
+    {
+      "bank1": {
+        "category": "CurSav Account Transactions",
+        "schema": "approvedOverdraftLimit"
+      },
+      "bank2": {
+        "category": "Deposit Account Transactions",
+        "schema": "overdraftLimit"
+      }
+    },
+    {
+      "bank1": {
+        "category": "Fixed Term Account Transactions",
+        "schema": "transactionReference"
+      },
+      "bank2": {
+        "category": "Deposit Account Transactions",
+        "schema": "id"
+      }
+    },
+    {
+      "bank1": {
+        "category": "Fixed Term Account Transactions",
+        "schema": "transactionAmount"
+      },
+      "bank2": {
+        "category": "Deposit Account Transactions",
+        "schema": "amount"
+      }
+    },
+    {
+      "bank1": {
+        "category": "Fixed Term Account Transactions",
+        "schema": "currency"
+      },
+      "bank2": {
+        "category": "Deposit Account Transactions",
+        "schema": "currencyCode"
+      }
+    },
+    {
+      "bank1": {
+        "category": "Fixed Term Account Transactions",
+        "schema": "transactionDate"
+      },
+      "bank2": {
+        "category": "Deposit Account Transactions",
+        "schema": "creationDate"
+      }
+    },
+    {
+      "bank1": {
+        "category": "Fixed Term Account Transactions",
+        "schema": "interestAmount"
+      },
+      "bank2": {
+        "category": "Deposit Account Transactions",
+        "schema": "interestAmount"
+      }
+    },
+    {
+      "bank1": {
+        "category": "Fixed Term Account Transactions",
+        "schema": "interestRate"
+      },
+      "bank2": {
+        "category": "Deposit Account Transactions",
+        "schema": "interestRate"
+      }
+    },
+    {
+      "bank1": {
+        "category": "Loan Account Transactions",
+        "schema": "transactionReference"
+      },
+      "bank2": {
+        "category": "Loan Account Transactions",
+        "schema": "id"
+      }
+    },
+    {
+      "bank1": {
+        "category": "Loan Account Transactions",
+        "schema": "transactionAmount"
+      },
+      "bank2": {
+        "category": "Loan Account Transactions",
+        "schema": "amount"
+      }
+    },
+    {
+      "bank1": {
+        "category": "Loan Account Transactions",
+        "schema": "currency"
+      },
+      "bank2": {
+        "category": "Loan Account Transactions",
+        "schema": "originalCurrencyCode"
+      }
+    },
+    {
+      "bank1": {
+        "category": "Loan Account Transactions",
+        "schema": "principalAmount"
+      },
+      "bank2": {
+        "category": "Loan Account Transactions",
+        "schema": "principalAmount"
+      }
+    },
+    {
+      "bank1": {
+        "category": "Loan Account Transactions",
+        "schema": "interestAmount"
+      },
+      "bank2": {
+        "category": "Loan Account Transactions",
+        "schema": "interestAmount"
+      }
+    },
+    {
+      "bank1": {
+        "category": "Loan Account Transactions",
+        "schema": "accountId"
+      },
+      "bank2": {
+        "category": "Loan Account Transactions",
+        "schema": "parentAccountKey"
+      }
+    }
+  ],
+  "statistics": {
+    "total_matched": 68,
+    "total_unmatched_bank1": 1,
+    "total_unmatched_bank2": 1,
+    "total_schemas": 70
+  }
+}

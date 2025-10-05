@@ -1,0 +1,12 @@
+{
+  "unmatched_schemas": [
+    {
+      "schema": "accountOfficerId,",
+      "category": "Customer",
+      "description": "",
+      "data": {}
+    }
+  ],
+  "bank": "Bank 1",
+  "count": 1
+}

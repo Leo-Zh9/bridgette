@@ -5,8 +5,14 @@ const isLocal = window.location.hostname === 'localhost' ||
                 window.location.protocol === 'file:';
 
 const BACKEND_URL = isLocal 
-    ? 'http://localhost:5000' 
+    ? 'http://localhost:5001' 
     : window.location.origin;
+
+// Debug logging
+console.log('🔧 Bridgette Frontend Configuration:');
+console.log('  - isLocal:', isLocal);
+console.log('  - BACKEND_URL:', BACKEND_URL);
+console.log('  - window.location:', window.location.href);
 document.addEventListener('DOMContentLoaded', function() {
     // Add smooth scrolling to all anchor links
     const links = document.querySelectorAll('a[href^="#"]');
@@ -443,13 +449,21 @@ function processFiles(boxNumber) {
     });
     
     // Send files to backend
+    console.log('🚀 Sending request to:', `${BACKEND_URL}/api/process-files`);
     fetch(`${BACKEND_URL}/api/process-files`, {
         method: 'POST',
         body: formData
     })
-    .then(response => response.json())
+    .then(response => {
+        console.log('📡 Response status:', response.status);
+        console.log('📡 Response headers:', response.headers);
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+        return response.json();
+    })
     .then(data => {
-        console.log('DEBUG: Received JSON data:', data);  // Debug log
+        console.log('✅ Received JSON data:', data);  // Debug log
         if (data.success) {
             // Display JSON results
             showJsonResults(data.results, data.file_count, boxNumber, data.is_schema);
@@ -458,8 +472,8 @@ function processFiles(boxNumber) {
         }
     })
     .catch(error => {
-        console.error('Error:', error);
-        alert('Error processing files. Please make sure the backend server is running.');
+        console.error('❌ Fetch error:', error);
+        alert(`Error processing files: ${error.message}\n\nPlease make sure the backend server is running on ${BACKEND_URL}`);
     })
     .finally(() => {
         processBtn.textContent = originalText;
@@ -815,7 +829,7 @@ function showJsonResults(results, fileCount, boxNumber, isSchema) {
                             <div style="background: #e7f3ff; padding: 10px; border-radius: 5px; margin-bottom: 10px; border-left: 3px solid #17a2b8;">
                                 <p style="margin: 0; font-size: 0.9rem; color: #333;">
                                     <strong>💾 Saved to server:</strong> ${result.json_filename}<br>
-                                    <strong>🔗 API URL:</strong> <code style="background: #f8f9fa; padding: 2px 4px; border-radius: 3px;">http://localhost:5000/api/json-files/${result.json_filename}</code><br>
+                                    <strong>🔗 API URL:</strong> <code style="background: #f8f9fa; padding: 2px 4px; border-radius: 3px;">http://localhost:5001/api/json-files/${result.json_filename}</code><br>
                                     <strong>🆔 Unique ID:</strong> ${result.unique_id}
                                 </p>
                             </div>
@@ -859,7 +873,7 @@ function showJsonResults(results, fileCount, boxNumber, isSchema) {
                             <div style="background: #e7f3ff; padding: 10px; border-radius: 5px; margin-bottom: 10px; border-left: 3px solid #17a2b8;">
                                 <p style="margin: 0; font-size: 0.9rem; color: #333;">
                                     <strong>💾 Saved to server:</strong> ${result.json_filename}<br>
-                                    <strong>🔗 API URL:</strong> <code style="background: #f8f9fa; padding: 2px 4px; border-radius: 3px;">http://localhost:5000/api/json-files/${result.json_filename}</code><br>
+                                    <strong>🔗 API URL:</strong> <code style="background: #f8f9fa; padding: 2px 4px; border-radius: 3px;">http://localhost:5001/api/json-files/${result.json_filename}</code><br>
                                     <strong>🆔 Unique ID:</strong> ${result.unique_id}
                                 </p>
                             </div>

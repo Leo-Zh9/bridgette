@@ -278,7 +278,7 @@ def process_files():
             if allowed_file(file.filename):
                 # Check file size
                 file.seek(0, 2)  # Seek to end
-                file_size = file.tell()
+                file_size = int(file.tell())
                 file.seek(0)  # Reset to beginning
                 
                 if file_size > MAX_FILE_SIZE:
@@ -471,7 +471,7 @@ def start_merging():
 
 if __name__ == '__main__':
     print("Starting Bridgette Backend Server...")
-    print(f"Backend will be available at: http://{app.config['HOST']}:{app.config['PORT']}")
+    print(f"Backend will be available at: http://{app.config['HOST']}:5001")
     print("API Endpoints:")
     print("  POST /api/process-files - Convert uploaded files to JSON format")
     print("    - ?schema=true for schema files (titles from rows 1-4, headers from row 5)")
@@ -488,4 +488,4 @@ if __name__ == '__main__':
     print("  - Handles multiple Excel tabs with titles")
     print("  - Optimized for large files (up to 50MB)")
     print(f"Environment: {'Development' if app.config['DEBUG'] else 'Production'}")
-    app.run(debug=app.config['DEBUG'], host=app.config['HOST'], port=app.config['PORT'])
+    app.run(debug=app.config['DEBUG'], host=app.config['HOST'], port=5001)

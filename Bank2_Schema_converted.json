@@ -1,0 +1,571 @@
+{
+  "Customer": [
+    {
+      "Customer": "lastName",
+      "Unnamed: 1": "The last name, surname, or family name of the client."
+    },
+    {
+      "Customer": "migrationEventKey",
+      "Unnamed: 1": "The migration event encoded key associated with a client."
+    },
+    {
+      "Customer": "preferredLanguage",
+      "Unnamed: 1": "The client's preferred language. This will determine the language for the reports, schedules, and account statements you generate for the client."
+    },
+    {
+      "Customer": "notes",
+      "Unnamed: 1": "The additional notes about a client."
+    },
+    {
+      "Customer": "gender",
+      "Unnamed: 1": "The client's gender"
+    },
+    {
+      "Customer": "emailAddress",
+      "Unnamed: 1": "The client's email address."
+    },
+    {
+      "Customer": "encodedKey",
+      "Unnamed: 1": "The encoded key of the client, which is unique and generated."
+    },
+    {
+      "Customer": "id",
+      "Unnamed: 1": "The ID of the client, which can be generated and customized - but must be unique."
+    },
+    {
+      "Customer": "state",
+      "Unnamed: 1": "The state of a client. It shows where the client is in the client life cycle."
+    },
+    {
+      "Customer": "assignedUserKey",
+      "Unnamed: 1": "The encoded key of the user a client is assigned to."
+    },
+    {
+      "Customer": "homePhone",
+      "Unnamed: 1": "The client's home phone number."
+    },
+    {
+      "Customer": "creationDate",
+      "Unnamed: 1": "The date a client was created."
+    },
+    {
+      "Customer": "birthDate",
+      "Unnamed: 1": "The client's date of birth."
+    },
+    {
+      "Customer": "firstName",
+      "Unnamed: 1": "The first name, personal name, given name, or forename of the client."
+    },
+    {
+      "Customer": "mobilePhone",
+      "Unnamed: 1": "The client's mobile phone number."
+    },
+    {
+      "Customer": "clientType",
+      "Unnamed: 1": "The type of client."
+    }
+  ],
+  "Addresses": [
+    {
+      "Addresses": "city",
+      "Unnamed: 1": "The city for the address."
+    },
+    {
+      "Addresses": "country",
+      "Unnamed: 1": "The country."
+    },
+    {
+      "Addresses": "encodedKey",
+      "Unnamed: 1": "The address encoded key, which is unique and generated."
+    },
+    {
+      "Addresses": "line1",
+      "Unnamed: 1": "The first line of the address."
+    },
+    {
+      "Addresses": "parentKey",
+      "Unnamed: 1": "The address parent key indicating the client owning this address."
+    },
+    {
+      "Addresses": "postcode",
+      "Unnamed: 1": "The post code."
+    },
+    {
+      "Addresses": "region",
+      "Unnamed: 1": "The region for the address."
+    }
+  ],
+  "Identifications": [
+    {
+      "Identifications": "clientKey",
+      "Unnamed: 1": "The encoded key of the client that owns this document"
+    },
+    {
+      "Identifications": "documentId",
+      "Unnamed: 1": "The id of the document"
+    },
+    {
+      "Identifications": "documentType",
+      "Unnamed: 1": "The type of the document, Passport, Id card Drivers license, etc."
+    },
+    {
+      "Identifications": "encodedKey",
+      "Unnamed: 1": "The encoded key of the document, generated, unique"
+    },
+    {
+      "Identifications": "issuingAuthority",
+      "Unnamed: 1": "The authority who issued the document."
+    },
+    {
+      "Identifications": "issuingCountry",
+      "Unnamed: 1": "The country where the document was issued."
+    },
+    {
+      "Identifications": "issuingDate",
+      "Unnamed: 1": "The date when the document was issued."
+    },
+    {
+      "Identifications": "validUntil",
+      "Unnamed: 1": "Date when the validity of the document ends"
+    }
+  ],
+  "Deposit Accounts": [
+    {
+      "Deposit Accounts": "encodedKey",
+      "Unnamed: 1": "The encoded key of the deposit account"
+    },
+    {
+      "Deposit Accounts": "id",
+      "Unnamed: 1": "The ID of the deposit account"
+    },
+    {
+      "Deposit Accounts": "name",
+      "Unnamed: 1": "The deposit account name"
+    },
+    {
+      "Deposit Accounts": "accountHolderKey",
+      "Unnamed: 1": "The encoded key of the account holder"
+    },
+    {
+      "Deposit Accounts": "accountHolderType",
+      "Unnamed: 1": "The account holder type"
+    },
+    {
+      "Deposit Accounts": "productTypeKey",
+      "Unnamed: 1": "The key to the product type that this account is based on"
+    },
+    {
+      "Deposit Accounts": "accountState",
+      "Unnamed: 1": "The state of the deposit account"
+    },
+    {
+      "Deposit Accounts": "currencyCode",
+      "Unnamed: 1": "The currency code"
+    },
+    {
+      "Deposit Accounts": "assignedBranchKey",
+      "Unnamed: 1": "The key of the branch that this deposit account is assigned to"
+    },
+    {
+      "Deposit Accounts": "creationDate",
+      "Unnamed: 1": "The date this deposit account was created"
+    },
+    {
+      "Deposit Accounts": "availableBalance",
+      "Unnamed: 1": "The current available balance for deposit transactions"
+    },
+    {
+      "Deposit Accounts": "totalBalance",
+      "Unnamed: 1": "The current balance of the account"
+    },
+    {
+      "Deposit Accounts": "lockedBalance",
+      "Unnamed: 1": "The locked amount that is not available for withdrawal in the account"
+    },
+    {
+      "Deposit Accounts": "overdraftAmount",
+      "Unnamed: 1": "The overdraft amount that has been taken out in the account"
+    },
+    {
+      "Deposit Accounts": "productDescription",
+      "Unnamed: 1": "Indicates the description of the Product"
+    },
+    {
+      "Deposit Accounts": "beneficialOwner",
+      "Unnamed: 1": "Indicates the customer who is the legal owner of the arrangement and is the responsible customer of the contract with bank"
+    },
+    {
+      "Deposit Accounts": "notes",
+      "Unnamed: 1": "The notes or description attached to this object"
+    },
+    {
+      "Deposit Accounts": "maturityDate",
+      "Unnamed: 1": "The date when the account matures"
+    },
+    {
+      "Deposit Accounts": "closedDate",
+      "Unnamed: 1": "The date when the deposit account was closed"
+    },
+    {
+      "Deposit Accounts": "assignedUserKey",
+      "Unnamed: 1": "The key of the user that this deposit is assigned to"
+    },
+    {
+      "Deposit Accounts": "availableBalance",
+      "Unnamed: 1": "The current available balance for deposit transactions"
+    },
+    {
+      "Deposit Accounts": "interestAccrued",
+      "Unnamed: 1": "The amount of positive interest that has been accrued in the account"
+    },
+    {
+      "Deposit Accounts": "accountType",
+      "Unnamed: 1": "The deposit account type and the product that it belongs to"
+    },
+    {
+      "Deposit Accounts": "interestRate",
+      "Unnamed: 1": "The interest rate for the deposit account"
+    },
+    {
+      "Deposit Accounts": "interestPaymentPoint",
+      "Unnamed: 1": "The interest payment point"
+    }
+  ],
+  "Loan Accounts": [
+    {
+      "Loan Accounts": "id",
+      "Unnamed: 1": "The ID of the loan account"
+    },
+    {
+      "Loan Accounts": "loanName",
+      "Unnamed: 1": "The name of the loan account"
+    },
+    {
+      "Loan Accounts": "productTypeKey",
+      "Unnamed: 1": "The key for the type of loan product that this loan account is based on"
+    },
+    {
+      "Loan Accounts": "currencyCode",
+      "Unnamed: 1": "Fiat(ISO-4217) currency code"
+    },
+    {
+      "Loan Accounts": "accountHolderKey",
+      "Unnamed: 1": "The encoded key of the account holder"
+    },
+    {
+      "Loan Accounts": "accountHolderType",
+      "Unnamed: 1": "The type of the account holder"
+    },
+    {
+      "Loan Accounts": "assignedBranchKey",
+      "Unnamed: 1": "The key of the branch this loan account is assigned to"
+    },
+    {
+      "Loan Accounts": "notes",
+      "Unnamed: 1": "The notes about this loan account"
+    },
+    {
+      "Loan Accounts": "maturityDate",
+      "Unnamed: 1": "The date when the account matures"
+    },
+    {
+      "Loan Accounts": "creationDate",
+      "Unnamed: 1": "The date the loan account was created"
+    },
+    {
+      "Loan Accounts": "closedDate",
+      "Unnamed: 1": "The date the loan was closed"
+    },
+    {
+      "Loan Accounts": "assignedUserKey",
+      "Unnamed: 1": "The key of the user this loan account is assigned to"
+    },
+    {
+      "Loan Accounts": "totalBalance",
+      "Unnamed: 1": "The current balance of the account"
+    },
+    {
+      "Loan Accounts": "availableBalance",
+      "Unnamed: 1": "The available balance of a deposit or credit account"
+    },
+    {
+      "Loan Accounts": "interestRate",
+      "Unnamed: 1": "The interest rate for the loan account"
+    },
+    {
+      "Loan Accounts": "interestType",
+      "Unnamed: 1": "The possible values for how we compute and apply the interest"
+    },
+    {
+      "Loan Accounts": "interestApplicationMethod",
+      "Unnamed: 1": "The interest application method"
+    },
+    {
+      "Loan Accounts": "effectiveInterestRate",
+      "Unnamed: 1": "Adjustable interest rates settings for loan account"
+    },
+    {
+      "Loan Accounts": "gracePeriod",
+      "Unnamed: 1": "The grace period for loan repayment"
+    },
+    {
+      "Loan Accounts": "periodicPayment",
+      "Unnamed: 1": "The periodic payment amount"
+    },
+    {
+      "Loan Accounts": "repaymentInstallments",
+      "Unnamed: 1": "The repayment installments"
+    },
+    {
+      "Loan Accounts": "repaymentPeriodUnit",
+      "Unnamed: 1": "The repayment period unit"
+    },
+    {
+      "Loan Accounts": "fixedDaysOfMonth",
+      "Unnamed: 1": "Specifies the days of the month when the repayment due dates should be."
+    },
+    {
+      "Loan Accounts": "repaymentPeriodCount",
+      "Unnamed: 1": "The repayment period count"
+    },
+    {
+      "Loan Accounts": "amortizationPeriod",
+      "Unnamed: 1": "The PMT is calculated as the loan would have [amortizationPeriod] installments."
+    },
+    {
+      "Loan Accounts": "principalDue",
+      "Unnamed: 1": "The principal due"
+    },
+    {
+      "Loan Accounts": "principalBalance",
+      "Unnamed: 1": "The total principal owned by the client"
+    },
+    {
+      "Loan Accounts": "interestDue",
+      "Unnamed: 1": "The interest due"
+    },
+    {
+      "Loan Accounts": "feesDue",
+      "Unnamed: 1": "The fees due"
+    },
+    {
+      "Loan Accounts": "interestBalance",
+      "Unnamed: 1": "Represents the total interest owed by the client"
+    },
+    {
+      "Loan Accounts": "interestFromArrearsBalance",
+      "Unnamed: 1": "The interest from arrears balance"
+    },
+    {
+      "Loan Accounts": "totalBalance",
+      "Unnamed: 1": "The current balance of the account"
+    },
+    {
+      "Loan Accounts": "interestAccrued",
+      "Unnamed: 1": "The amount of positive interest that has been accrued in the account"
+    },
+    {
+      "Loan Accounts": "accountType",
+      "Unnamed: 1": "The deposit account type and the product that it belongs to"
+    }
+  ],
+  "Deposit Account Transactions": [
+    {
+      "Deposit Account Transactions": "id",
+      "Unnamed: 1": "The id of the deposit transaction"
+    },
+    {
+      "Deposit Account Transactions": "encodedKey",
+      "Unnamed: 1": "The encoded key of the deposit transaction"
+    },
+    {
+      "Deposit Account Transactions": "type",
+      "Unnamed: 1": "The type of deposit transaction (e.g. DEPOSIT WITHDRAWAL FEE_APPLIED)"
+    },
+    {
+      "Deposit Account Transactions": "amount",
+      "Unnamed: 1": "How much was added/removed in account"
+    },
+    {
+      "Deposit Account Transactions": "currencyCode",
+      "Unnamed: 1": "The currency in which this transaction was posted"
+    },
+    {
+      "Deposit Account Transactions": "creationDate",
+      "Unnamed: 1": "The date when this deposit transaction was created"
+    },
+    {
+      "Deposit Account Transactions": "valueDate",
+      "Unnamed: 1": "Date of the entry (eg date of repayment or disbursal etc.)"
+    },
+    {
+      "Deposit Account Transactions": "notes",
+      "Unnamed: 1": "Extra notes about this deposit transaction"
+    },
+    {
+      "Deposit Account Transactions": "externalId",
+      "Unnamed: 1": "The external id of the deposit transaction"
+    },
+    {
+      "Deposit Account Transactions": "userKey",
+      "Unnamed: 1": "The person that performed the transaction"
+    },
+    {
+      "Deposit Account Transactions": "branchKey",
+      "Unnamed: 1": "The branch where the transaction was performed"
+    },
+    {
+      "Deposit Account Transactions": "feesAmount",
+      "Unnamed: 1": "Amount of fees involved in a transaction"
+    },
+    {
+      "Deposit Account Transactions": "interestAmount",
+      "Unnamed: 1": "Amount of interest involved in a transaction"
+    },
+    {
+      "Deposit Account Transactions": "taxRate",
+      "Unnamed: 1": "The tax rate that was set or changed in this transaction"
+    },
+    {
+      "Deposit Account Transactions": "totalBalance",
+      "Unnamed: 1": "The running balance owed by deposit"
+    },
+    {
+      "Deposit Account Transactions": "interestRate",
+      "Unnamed: 1": "The interest rate for the deposit transaction"
+    },
+    {
+      "Deposit Account Transactions": "transactionChannel",
+      "Unnamed: 1": "The id of the transaction channel"
+    },
+    {
+      "Deposit Account Transactions": "bookingDate",
+      "Unnamed: 1": "The date when corresponding JE is booked"
+    },
+    {
+      "Deposit Account Transactions": "feesPredefinedFee",
+      "Unnamed: 1": "The type of the predefined fee"
+    },
+    {
+      "Deposit Account Transactions": "feesName",
+      "Unnamed: 1": "The name of the predefined fee"
+    },
+    {
+      "Deposit Account Transactions": "taxRate",
+      "Unnamed: 1": "The tax rate that was set or changed in this transaction"
+    },
+    {
+      "Deposit Account Transactions": "availableBalance",
+      "Unnamed: 1": "The available balance after the transaction"
+    },
+    {
+      "Deposit Account Transactions": "lockedBalance",
+      "Unnamed: 1": "The locked amount that is not available for withdrawal in the account"
+    },
+    {
+      "Deposit Account Transactions": "overdraftAmount",
+      "Unnamed: 1": "The overdraft amount that has been taken out in the account"
+    },
+    {
+      "Deposit Account Transactions": "interestBalance",
+      "Unnamed: 1": "Represents the total interest owed by the client"
+    },
+    {
+      "Deposit Account Transactions": "overdraftLimit",
+      "Unnamed: 1": "The overdraft limit that was set or changed in this transaction"
+    },
+    {
+      "Deposit Account Transactions": "parentAccountKey",
+      "Unnamed: 1": "The key of the parent deposit account"
+    }
+  ],
+  "Loan Account Transactions": [
+    {
+      "Loan Account Transactions": "encodedKey",
+      "Unnamed: 1": "The encoded key of the loan transaction"
+    },
+    {
+      "Loan Account Transactions": "id",
+      "Unnamed: 1": "The ID of the loan transaction"
+    },
+    {
+      "Loan Account Transactions": "type",
+      "Unnamed: 1": "The type of loan transaction (e.g. DISBURSEMENT, REPAYMENT)"
+    },
+    {
+      "Loan Account Transactions": "amount",
+      "Unnamed: 1": "The amount that was added or removed on the loan account"
+    },
+    {
+      "Loan Account Transactions": "originalCurrencyCode",
+      "Unnamed: 1": "The currency in which this transaction was posted"
+    },
+    {
+      "Loan Account Transactions": "valueDate",
+      "Unnamed: 1": "The date of the entry in the organization time format and timezone"
+    },
+    {
+      "Loan Account Transactions": "notes",
+      "Unnamed: 1": "The notes or description for the loan transaction"
+    },
+    {
+      "Loan Account Transactions": "externalId",
+      "Unnamed: 1": "The external ID of the loan transaction"
+    },
+    {
+      "Loan Account Transactions": "userKey",
+      "Unnamed: 1": "The user that performed the transaction"
+    },
+    {
+      "Loan Account Transactions": "branchKey",
+      "Unnamed: 1": "The branch where the transaction was performed"
+    },
+    {
+      "Loan Account Transactions": "principalAmount",
+      "Unnamed: 1": "How much principal was added/removed in account"
+    },
+    {
+      "Loan Account Transactions": "interestAmount",
+      "Unnamed: 1": "How much interest was added/removed in account"
+    },
+    {
+      "Loan Account Transactions": "feesAmount",
+      "Unnamed: 1": "How much fees was added/removed in account"
+    },
+    {
+      "Loan Account Transactions": "totalBalance",
+      "Unnamed: 1": "The running balance still owed for the loan"
+    },
+    {
+      "Loan Account Transactions": "principalBalance",
+      "Unnamed: 1": "The account redraw balance captured after the transaction update"
+    },
+    {
+      "Loan Account Transactions": "interestRate",
+      "Unnamed: 1": "The interest rate for the loan transaction"
+    },
+    {
+      "Loan Account Transactions": "transactionChannel",
+      "Unnamed: 1": "The id of the transaction channel"
+    },
+    {
+      "Loan Account Transactions": "parentAccountKey",
+      "Unnamed: 1": "The key of the parent loan account"
+    }
+  ],
+  "_metadata": {
+    "file_type": ".XLSX",
+    "file_name": "Bank2_Schema.xlsx",
+    "sheets": [
+      "Customer",
+      "Addresses",
+      "Identifications",
+      "Deposit Accounts",
+      "Loan Accounts",
+      "Deposit Account Transactions",
+      "Loan Account Transactions"
+    ],
+    "sheet_count": 7,
+    "total_rows": 156
+  }
+}

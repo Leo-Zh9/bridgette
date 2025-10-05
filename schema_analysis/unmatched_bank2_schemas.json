@@ -1,0 +1,12 @@
+{
+  "unmatched_schemas": [
+    {
+      "schema": "migrationEventKey,",
+      "category": "Customer",
+      "description": "",
+      "data": {}
+    }
+  ],
+  "bank": "Bank 2",
+  "count": 1
+}
