@@ -1,3 +1,24 @@
+"""
+Bridgette Backend API Server
+============================
+
+This Flask application serves as the backend API for the Bridgette financial data processing platform.
+It handles file uploads, schema processing, data merging, and Excel file generation.
+
+Key Features:
+- File upload and storage management
+- Schema-based data mapping between different bank formats
+- OpenAI API integration for intelligent schema matching
+- Excel file generation with fallback mechanisms
+- CORS-enabled for frontend communication
+
+Architecture Assumptions:
+- Files are organized by bank (bank1, bank2) for schema mapping
+- Schema files define the mapping between different bank data formats
+- OpenAI API provides intelligent schema matching capabilities
+- Fallback mechanisms ensure system reliability when AI services are unavailable
+"""
+
 from flask import Flask, request, jsonify, send_file
 from flask_cors import CORS
 import os
@@ -10,34 +31,44 @@ from datetime import datetime
 import numpy as np
 import uuid
 
+# Initialize Flask application with CORS support
+# CORS is essential for frontend-backend communication in web applications
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all origins (production-ready)
 
 # Environment configuration
+# These settings allow the app to run in different environments (dev/prod)
 app.config['DEBUG'] = os.environ.get('FLASK_DEBUG', 'False').lower() == 'true'
-app.config['HOST'] = os.environ.get('FLASK_HOST', '0.0.0.0')
-app.config['PORT'] = int(os.environ.get('PORT', 5001))  # Dynamic port for production
+app.config['HOST'] = os.environ.get('FLASK_HOST', '0.0.0.0')  # 0.0.0.0 allows external connections
+app.config['PORT'] = int(os.environ.get('PORT', 5001))  # Dynamic port for production deployment
 
-# Configuration
-ALLOWED_EXTENSIONS = {'csv', 'xlsx', 'xls'}
-MAX_FILE_SIZE = 50 * 1024 * 1024  # 50MB
+# File processing configuration
+# These limits balance functionality with security and performance
+ALLOWED_EXTENSIONS = {'csv', 'xlsx', 'xls'}  # Supported file formats for financial data
+MAX_FILE_SIZE = 50 * 1024 * 1024  # 50MB limit to prevent memory issues with large datasets
 
-# Create directory for storing original uploaded files
-UPLOAD_STORAGE_DIR = 'uploaded_files'
-EXCEL_OUTPUT_DIR = 'generated_excel_files'
+# Directory structure for file organization
+# This structure supports the bank-to-bank mapping workflow
+UPLOAD_STORAGE_DIR = 'uploaded_files'  # Original uploaded files storage
+EXCEL_OUTPUT_DIR = 'generated_excel_files'  # Processed Excel files for download
 
+# Ensure required directories exist
+# Directory creation is idempotent - safe to run multiple times
 if not os.path.exists(UPLOAD_STORAGE_DIR):
     os.makedirs(UPLOAD_STORAGE_DIR)
     
 if not os.path.exists(EXCEL_OUTPUT_DIR):
     os.makedirs(EXCEL_OUTPUT_DIR)
 
-# Create directory for temporary JSON files
+# Temporary JSON files directory for intermediate processing
+# JSON format is used for schema analysis and OpenAI API communication
 JSON_TEMP_DIR = 'temp_json_files'
 if not os.path.exists(JSON_TEMP_DIR):
     os.makedirs(JSON_TEMP_DIR)
 
-# Removed convert_to_json_serializable - no longer converting files to JSON
+# Note: Removed convert_to_json_serializable function
+# This was part of an earlier architecture that converted all files to JSON
+# Current approach maintains original file formats for better performance
 
 def save_uploaded_file(file_data, filename, is_schema=False, box_number=1):
     """Save uploaded file with original filename in organized subdirectories"""

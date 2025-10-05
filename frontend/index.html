@@ -1,11 +1,41 @@
 <!DOCTYPE html>
+<!--
+Bridgette Frontend HTML
+=======================
+
+This is the main HTML file for the Bridgette financial data processing platform.
+It provides a user-friendly interface for uploading, processing, and downloading
+financial data from different bank formats.
+
+Key Features:
+- Responsive design for desktop and mobile devices
+- File upload interface with drag-and-drop support
+- Schema-based data mapping workflow
+- Real-time processing feedback
+- Download functionality for processed Excel files
+
+Architecture Notes:
+- Uses semantic HTML5 structure for accessibility
+- Implements progressive enhancement (works without JavaScript)
+- Cache-busting version parameters (?v=7) ensure updates are visible
+- Font Awesome icons provide visual feedback
+- Smooth scrolling navigation enhances user experience
+
+Design Assumptions:
+- Users need clear visual feedback during file processing
+- Drag-and-drop is more intuitive than traditional file selection
+- Progress indicators are essential for long-running operations
+- Mobile-first design ensures accessibility across devices
+-->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bridgette - Welcome</title>
     <link rel="icon" type="image/png" href="images/BridgetteLogo.png">
-    <link rel="stylesheet" href="styles.css?v=4">
+    <!-- Cache-busting version parameter ensures CSS updates are visible -->
+    <link rel="stylesheet" href="styles.css?v=7">
+    <!-- Font Awesome for icons - provides visual feedback for user interactions -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
@@ -61,8 +91,8 @@
                 
                 <!-- Bank Schema Upload Boxes -->
                 <div class="schema-section">
-                    <h3 class="schema-title">Bank Schema Files</h3>
-                    <p class="schema-description">Upload bank schema files (starts from line 5 with headers, maps 1 -> 2)</p>
+                    <h3 class="data-title">Bank Schema Files</h3>
+                    <p class="data-description">Upload bank schema files (maps 1 -> 2)</p>
                     
                     <div class="upload-areas">
                         <!-- First Schema Upload Box -->
@@ -117,8 +147,8 @@
                 
                 <!-- Regular Data Upload Boxes -->
                 <div class="data-section">
-                    <h3 class="data-title">Regular Data Files</h3>
-                    <p class="data-description">Upload regular data files (starts from line 1 with headers)</p>
+                    <h3 class="data-title">Data Files</h3>
+                    <p class="data-description">Upload non-schema data files with information in columns</p>
                     
                     <div class="upload-areas">
                     <!-- First Upload Box -->
@@ -272,6 +302,6 @@
         </div>
     </footer>
 
-    <script src="script.js?v=4"></script>
+    <script src="script.js?v=7"></script>
 </body>
 </html>

@@ -1,3 +1,29 @@
+"""
+Bridgette Main Processing Module
+===============================
+
+This module contains the core data processing logic for the Bridgette platform.
+It handles schema analysis, data mapping, and Excel file generation using OpenAI API.
+
+Key Components:
+- Schema analysis and matching between different bank data formats
+- OpenAI API integration for intelligent data mapping
+- Excel file generation with customer data consolidation
+- Fallback mechanisms for when AI services are unavailable
+
+Architecture Rationale:
+- Uses OpenAI API for intelligent schema matching between bank formats
+- Implements fallback mechanisms to ensure system reliability
+- Processes data in chunks to handle large datasets efficiently
+- Maintains original file formats for better performance
+
+Assumptions:
+- Bank data follows standard financial data patterns
+- Schema files contain field names and descriptions for mapping
+- OpenAI API provides reliable schema matching capabilities
+- Customer data can be consolidated across different bank formats
+"""
+
 import pandas as pd
 import json
 import os

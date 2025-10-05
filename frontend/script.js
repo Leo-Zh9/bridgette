@@ -1,14 +1,39 @@
+/**
+ * Bridgette Frontend JavaScript
+ * =============================
+ * 
+ * This file contains the client-side logic for the Bridgette financial data processing platform.
+ * It handles user interactions, file uploads, API communication, and UI updates.
+ * 
+ * Key Features:
+ * - Dynamic backend URL detection for local/remote environments
+ * - File upload handling with drag-and-drop support
+ * - Real-time API communication with progress feedback
+ * - Smooth scrolling navigation
+ * - Error handling and user feedback
+ * 
+ * Architecture Assumptions:
+ * - Backend runs on port 5001 in local development
+ * - Production uses same-origin requests
+ * - File uploads are processed asynchronously
+ * - User feedback is essential for long-running operations
+ */
+
 // Configuration - Backend URL based on environment
+// This dynamic detection allows the same code to work in development and production
 const isLocal = window.location.hostname === 'localhost' || 
                 window.location.hostname === '127.0.0.1' ||
                 window.location.hostname === '0.0.0.0' ||
                 window.location.protocol === 'file:';
 
+// Backend URL configuration
+// Local development uses explicit localhost:5001, production uses same origin
 const BACKEND_URL = isLocal 
     ? 'http://localhost:5001' 
     : window.location.origin;
 
-// Debug logging
+// Debug logging for development
+// These logs help troubleshoot connection issues between frontend and backend
 console.log('🔧 Bridgette Frontend Configuration:');
 console.log('  - isLocal:', isLocal);
 console.log('  - BACKEND_URL:', BACKEND_URL);
@@ -20,15 +45,9 @@ document.addEventListener('DOMContentLoaded', function() {
     links.forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
-            const targetId = this.getAttribute('href');
-            // const targetSection = document.querySelector(targetId);
-            
-            // if (targetSection) {
-            //     targetSection.scrollIntoView({
-            //         behavior: 'smooth',
-            //         block: 'start'
-            //     });
-            // }
+            const targetId = this.getAttribute('href').substring(1); // Remove the # symbol
+            console.log('Scrolling to section:', targetId); // Debug log
+            scrollToSection(targetId);
         });
     });
     
@@ -126,10 +145,13 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// Function to scroll to a specific section (used by CTA button)
+// Function to scroll to a specific section (used by CTA button and menu links)
 function scrollToSection(sectionId) {
+    console.log('Attempting to scroll to section:', sectionId);
     const section = document.getElementById(sectionId);
+    
     if (section) {
+        console.log('Section found:', section);
         // Get header height more reliably
         const header = document.querySelector('header');
         const headerHeight = header ? header.offsetHeight : 80;
@@ -140,22 +162,13 @@ function scrollToSection(sectionId) {
         // Ensure we don't scroll to negative position
         const scrollPosition = Math.max(0, sectionTop);
         
+        console.log('Scrolling to position:', scrollPosition);
         window.scrollTo({
             top: scrollPosition,
             behavior: 'smooth'
         });
-        
-        // Add a visual indicator that we've reached the section
-        setTimeout(() => {
-            section.style.outline = '3px solid rgba(102, 126, 234, 0.5)';
-            section.style.outlineOffset = '10px';
-            section.style.borderRadius = '10px';
-            
-            setTimeout(() => {
-                section.style.outline = 'none';
-                section.style.outlineOffset = '0';
-            }, 2000);
-        }, 500);
+    } else {
+        console.error('Section not found:', sectionId);
     }
 }
 

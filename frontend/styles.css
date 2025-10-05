@@ -1,21 +1,52 @@
+/**
+ * Bridgette Frontend Styles
+ * =========================
+ * 
+ * This CSS file contains all the styling for the Bridgette financial data processing platform.
+ * It implements a modern, responsive design with a focus on usability and accessibility.
+ * 
+ * Design Philosophy:
+ * - Clean, professional appearance suitable for financial applications
+ * - Responsive design that works on desktop, tablet, and mobile
+ * - Clear visual hierarchy to guide users through the workflow
+ * - Consistent color scheme and typography
+ * - Accessibility considerations (contrast, focus states, etc.)
+ * 
+ * Key Design Decisions:
+ * - Fixed header for easy navigation
+ * - Card-based layout for content organization
+ * - Gradient backgrounds for visual appeal
+ * - Hover effects for interactive feedback
+ * - Mobile-first responsive design approach
+ * 
+ * Color Scheme Rationale:
+ * - Primary: Blue gradient (#667eea to #764ba2) - professional, trustworthy
+ * - Secondary: Light gray (#f8f9fa) - clean, neutral background
+ * - Accent: Green for success states, red for errors
+ * - Text: Dark gray (#333) for optimal readability
+ */
+
 /* Reset and base styles */
+/* CSS reset ensures consistent rendering across browsers */
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    box-sizing: border-box; /* Border-box model for easier sizing calculations */
 }
 
+/* Base typography and layout */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    line-height: 1.6;
-    color: #333;
-    background-color: #f8f9fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern, readable font stack */
+    line-height: 1.6; /* Improved readability */
+    color: #333; /* High contrast for accessibility */
+    background-color: #f8f9fa; /* Light, neutral background */
 }
 
+/* Container for consistent content width */
 .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
+    max-width: 1200px; /* Optimal reading width */
+    margin: 0 auto; /* Center content */
+    padding: 0 20px; /* Side padding for mobile */
 }
 
 /* Header and Navigation */
@@ -215,9 +246,7 @@ header {
     margin-right: auto;
 }
 
-.schema-title {
-    color: #28a745; /* Green for schema */
-}
+
 
 .data-title {
     color: #667eea; /* Blue for regular data */
