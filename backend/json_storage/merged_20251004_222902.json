@@ -1,0 +1,1318 @@
+{
+  "merged_at": "2025-10-04T22:29:02.334297",
+  "total_files": 2,
+  "files": [
+    {
+      "original_filename": "Bank2_Schema.xlsx",
+      "json_filename": "20251004_222732_schema_cb1599fd_Bank2_Schema_xlsx.json",
+      "unique_id": "cb1599fd-7ab3-43aa-a6d2-3fde2acdd047",
+      "data": {
+        "filename": "tmpijuf6t3g.xlsx",
+        "file_type": "Excel",
+        "is_schema": true,
+        "sheet_count": 7,
+        "total_rows": 135,
+        "sheets": {
+          "Customer": {
+            "title": "Customer",
+            "columns": [
+              "name",
+              "description"
+            ],
+            "row_count": 16,
+            "data": [
+              {
+                "name": "lastName",
+                "description": "The last name, surname, or family name of the client."
+              },
+              {
+                "name": "migrationEventKey",
+                "description": "The migration event encoded key associated with a client."
+              },
+              {
+                "name": "preferredLanguage",
+                "description": "The client's preferred language. This will determine the language for the reports, schedules, and account statements you generate for the client."
+              },
+              {
+                "name": "notes",
+                "description": "The additional notes about a client."
+              },
+              {
+                "name": "gender",
+                "description": "The client's gender"
+              },
+              {
+                "name": "emailAddress",
+                "description": "The client's email address."
+              },
+              {
+                "name": "encodedKey",
+                "description": "The encoded key of the client, which is unique and generated."
+              },
+              {
+                "name": "id",
+                "description": "The ID of the client, which can be generated and customized - but must be unique."
+              },
+              {
+                "name": "state",
+                "description": "The state of a client. It shows where the client is in the client life cycle."
+              },
+              {
+                "name": "assignedUserKey",
+                "description": "The encoded key of the user a client is assigned to."
+              },
+              {
+                "name": "homePhone",
+                "description": "The client's home phone number."
+              },
+              {
+                "name": "creationDate",
+                "description": "The date a client was created."
+              },
+              {
+                "name": "birthDate",
+                "description": "The client's date of birth."
+              },
+              {
+                "name": "firstName",
+                "description": "The first name, personal name, given name, or forename of the client."
+              },
+              {
+                "name": "mobilePhone",
+                "description": "The client's mobile phone number."
+              },
+              {
+                "name": "clientType",
+                "description": "The type of client."
+              }
+            ]
+          },
+          "Addresses": {
+            "title": "Addresses",
+            "columns": [
+              "name",
+              "description"
+            ],
+            "row_count": 7,
+            "data": [
+              {
+                "name": "city",
+                "description": "The city for the address."
+              },
+              {
+                "name": "country",
+                "description": "The country."
+              },
+              {
+                "name": "encodedKey",
+                "description": "The address encoded key, which is unique and generated."
+              },
+              {
+                "name": "line1",
+                "description": "The first line of the address."
+              },
+              {
+                "name": "parentKey",
+                "description": "The address parent key indicating the client owning this address."
+              },
+              {
+                "name": "postcode",
+                "description": "The post code."
+              },
+              {
+                "name": "region",
+                "description": "The region for the address."
+              }
+            ]
+          },
+          "Identifications": {
+            "title": "Identifications",
+            "columns": [
+              "name",
+              "description"
+            ],
+            "row_count": 8,
+            "data": [
+              {
+                "name": "clientKey",
+                "description": "The encoded key of the client that owns this document"
+              },
+              {
+                "name": "documentId",
+                "description": "The id of the document"
+              },
+              {
+                "name": "documentType",
+                "description": "The type of the document, Passport, Id card Drivers license, etc."
+              },
+              {
+                "name": "encodedKey",
+                "description": "The encoded key of the document, generated, unique"
+              },
+              {
+                "name": "issuingAuthority",
+                "description": "The authority who issued the document."
+              },
+              {
+                "name": "issuingCountry",
+                "description": "The country where the document was issued."
+              },
+              {
+                "name": "issuingDate",
+                "description": "The date when the document was issued."
+              },
+              {
+                "name": "validUntil",
+                "description": "Date when the validity of the document ends"
+              }
+            ]
+          },
+          "Deposit Accounts": {
+            "title": "Deposit Accounts",
+            "columns": [
+              "name",
+              "description"
+            ],
+            "row_count": 25,
+            "data": [
+              {
+                "name": "encodedKey",
+                "description": "The encoded key of the deposit account"
+              },
+              {
+                "name": "id",
+                "description": "The ID of the deposit account"
+              },
+              {
+                "name": "name",
+                "description": "The deposit account name"
+              },
+              {
+                "name": "accountHolderKey",
+                "description": "The encoded key of the account holder"
+              },
+              {
+                "name": "accountHolderType",
+                "description": "The account holder type"
+              },
+              {
+                "name": "productTypeKey",
+                "description": "The key to the product type that this account is based on"
+              },
+              {
+                "name": "accountState",
+                "description": "The state of the deposit account"
+              },
+              {
+                "name": "currencyCode",
+                "description": "The currency code"
+              },
+              {
+                "name": "assignedBranchKey",
+                "description": "The key of the branch that this deposit account is assigned to"
+              },
+              {
+                "name": "creationDate",
+                "description": "The date this deposit account was created"
+              },
+              {
+                "name": "availableBalance",
+                "description": "The current available balance for deposit transactions"
+              },
+              {
+                "name": "totalBalance",
+                "description": "The current balance of the account"
+              },
+              {
+                "name": "lockedBalance",
+                "description": "The locked amount that is not available for withdrawal in the account"
+              },
+              {
+                "name": "overdraftAmount",
+                "description": "The overdraft amount that has been taken out in the account"
+              },
+              {
+                "name": "productDescription",
+                "description": "Indicates the description of the Product"
+              },
+              {
+                "name": "beneficialOwner",
+                "description": "Indicates the customer who is the legal owner of the arrangement and is the responsible customer of the contract with bank"
+              },
+              {
+                "name": "notes",
+                "description": "The notes or description attached to this object"
+              },
+              {
+                "name": "maturityDate",
+                "description": "The date when the account matures"
+              },
+              {
+                "name": "closedDate",
+                "description": "The date when the deposit account was closed"
+              },
+              {
+                "name": "assignedUserKey",
+                "description": "The key of the user that this deposit is assigned to"
+              },
+              {
+                "name": "availableBalance",
+                "description": "The current available balance for deposit transactions"
+              },
+              {
+                "name": "interestAccrued",
+                "description": "The amount of positive interest that has been accrued in the account"
+              },
+              {
+                "name": "accountType",
+                "description": "The deposit account type and the product that it belongs to"
+              },
+              {
+                "name": "interestRate",
+                "description": "The interest rate for the deposit account"
+              },
+              {
+                "name": "interestPaymentPoint",
+                "description": "The interest payment point"
+              }
+            ]
+          },
+          "Loan Accounts": {
+            "title": "Loan Accounts",
+            "columns": [
+              "name",
+              "description"
+            ],
+            "row_count": 34,
+            "data": [
+              {
+                "name": "id",
+                "description": "The ID of the loan account"
+              },
+              {
+                "name": "loanName",
+                "description": "The name of the loan account"
+              },
+              {
+                "name": "productTypeKey",
+                "description": "The key for the type of loan product that this loan account is based on"
+              },
+              {
+                "name": "currencyCode",
+                "description": "Fiat(ISO-4217) currency code"
+              },
+              {
+                "name": "accountHolderKey",
+                "description": "The encoded key of the account holder"
+              },
+              {
+                "name": "accountHolderType",
+                "description": "The type of the account holder"
+              },
+              {
+                "name": "assignedBranchKey",
+                "description": "The key of the branch this loan account is assigned to"
+              },
+              {
+                "name": "notes",
+                "description": "The notes about this loan account"
+              },
+              {
+                "name": "maturityDate",
+                "description": "The date when the account matures"
+              },
+              {
+                "name": "creationDate",
+                "description": "The date the loan account was created"
+              },
+              {
+                "name": "closedDate",
+                "description": "The date the loan was closed"
+              },
+              {
+                "name": "assignedUserKey",
+                "description": "The key of the user this loan account is assigned to"
+              },
+              {
+                "name": "totalBalance",
+                "description": "The current balance of the account"
+              },
+              {
+                "name": "availableBalance",
+                "description": "The available balance of a deposit or credit account"
+              },
+              {
+                "name": "interestRate",
+                "description": "The interest rate for the loan account"
+              },
+              {
+                "name": "interestType",
+                "description": "The possible values for how we compute and apply the interest"
+              },
+              {
+                "name": "interestApplicationMethod",
+                "description": "The interest application method"
+              },
+              {
+                "name": "effectiveInterestRate",
+                "description": "Adjustable interest rates settings for loan account"
+              },
+              {
+                "name": "gracePeriod",
+                "description": "The grace period for loan repayment"
+              },
+              {
+                "name": "periodicPayment",
+                "description": "The periodic payment amount"
+              },
+              {
+                "name": "repaymentInstallments",
+                "description": "The repayment installments"
+              },
+              {
+                "name": "repaymentPeriodUnit",
+                "description": "The repayment period unit"
+              },
+              {
+                "name": "fixedDaysOfMonth",
+                "description": "Specifies the days of the month when the repayment due dates should be."
+              },
+              {
+                "name": "repaymentPeriodCount",
+                "description": "The repayment period count"
+              },
+              {
+                "name": "amortizationPeriod",
+                "description": "The PMT is calculated as the loan would have [amortizationPeriod] installments."
+              },
+              {
+                "name": "principalDue",
+                "description": "The principal due"
+              },
+              {
+                "name": "principalBalance",
+                "description": "The total principal owned by the client"
+              },
+              {
+                "name": "interestDue",
+                "description": "The interest due"
+              },
+              {
+                "name": "feesDue",
+                "description": "The fees due"
+              },
+              {
+                "name": "interestBalance",
+                "description": "Represents the total interest owed by the client"
+              },
+              {
+                "name": "interestFromArrearsBalance",
+                "description": "The interest from arrears balance"
+              },
+              {
+                "name": "totalBalance",
+                "description": "The current balance of the account"
+              },
+              {
+                "name": "interestAccrued",
+                "description": "The amount of positive interest that has been accrued in the account"
+              },
+              {
+                "name": "accountType",
+                "description": "The deposit account type and the product that it belongs to"
+              }
+            ]
+          },
+          "Deposit Account Transactions": {
+            "title": "Deposit Account Transactions",
+            "columns": [
+              "name",
+              "description"
+            ],
+            "row_count": 27,
+            "data": [
+              {
+                "name": "id",
+                "description": "The id of the deposit transaction"
+              },
+              {
+                "name": "encodedKey",
+                "description": "The encoded key of the deposit transaction"
+              },
+              {
+                "name": "type",
+                "description": "The type of deposit transaction (e.g. DEPOSIT WITHDRAWAL FEE_APPLIED)"
+              },
+              {
+                "name": "amount",
+                "description": "How much was added/removed in account"
+              },
+              {
+                "name": "currencyCode",
+                "description": "The currency in which this transaction was posted"
+              },
+              {
+                "name": "creationDate",
+                "description": "The date when this deposit transaction was created"
+              },
+              {
+                "name": "valueDate",
+                "description": "Date of the entry (eg date of repayment or disbursal etc.)"
+              },
+              {
+                "name": "notes",
+                "description": "Extra notes about this deposit transaction"
+              },
+              {
+                "name": "externalId",
+                "description": "The external id of the deposit transaction"
+              },
+              {
+                "name": "userKey",
+                "description": "The person that performed the transaction"
+              },
+              {
+                "name": "branchKey",
+                "description": "The branch where the transaction was performed"
+              },
+              {
+                "name": "feesAmount",
+                "description": "Amount of fees involved in a transaction"
+              },
+              {
+                "name": "interestAmount",
+                "description": "Amount of interest involved in a transaction"
+              },
+              {
+                "name": "taxRate",
+                "description": "The tax rate that was set or changed in this transaction"
+              },
+              {
+                "name": "totalBalance",
+                "description": "The running balance owed by deposit"
+              },
+              {
+                "name": "interestRate",
+                "description": "The interest rate for the deposit transaction"
+              },
+              {
+                "name": "transactionChannel",
+                "description": "The id of the transaction channel"
+              },
+              {
+                "name": "bookingDate",
+                "description": "The date when corresponding JE is booked"
+              },
+              {
+                "name": "feesPredefinedFee",
+                "description": "The type of the predefined fee"
+              },
+              {
+                "name": "feesName",
+                "description": "The name of the predefined fee"
+              },
+              {
+                "name": "taxRate",
+                "description": "The tax rate that was set or changed in this transaction"
+              },
+              {
+                "name": "availableBalance",
+                "description": "The available balance after the transaction"
+              },
+              {
+                "name": "lockedBalance",
+                "description": "The locked amount that is not available for withdrawal in the account"
+              },
+              {
+                "name": "overdraftAmount",
+                "description": "The overdraft amount that has been taken out in the account"
+              },
+              {
+                "name": "interestBalance",
+                "description": "Represents the total interest owed by the client"
+              },
+              {
+                "name": "overdraftLimit",
+                "description": "The overdraft limit that was set or changed in this transaction"
+              },
+              {
+                "name": "parentAccountKey",
+                "description": "The key of the parent deposit account"
+              }
+            ]
+          },
+          "Loan Account Transactions": {
+            "title": "Loan Account Transactions",
+            "columns": [
+              "name",
+              "description"
+            ],
+            "row_count": 18,
+            "data": [
+              {
+                "name": "encodedKey",
+                "description": "The encoded key of the loan transaction"
+              },
+              {
+                "name": "id",
+                "description": "The ID of the loan transaction"
+              },
+              {
+                "name": "type",
+                "description": "The type of loan transaction (e.g. DISBURSEMENT, REPAYMENT)"
+              },
+              {
+                "name": "amount",
+                "description": "The amount that was added or removed on the loan account"
+              },
+              {
+                "name": "originalCurrencyCode",
+                "description": "The currency in which this transaction was posted"
+              },
+              {
+                "name": "valueDate",
+                "description": "The date of the entry in the organization time format and timezone"
+              },
+              {
+                "name": "notes",
+                "description": "The notes or description for the loan transaction"
+              },
+              {
+                "name": "externalId",
+                "description": "The external ID of the loan transaction"
+              },
+              {
+                "name": "userKey",
+                "description": "The user that performed the transaction"
+              },
+              {
+                "name": "branchKey",
+                "description": "The branch where the transaction was performed"
+              },
+              {
+                "name": "principalAmount",
+                "description": "How much principal was added/removed in account"
+              },
+              {
+                "name": "interestAmount",
+                "description": "How much interest was added/removed in account"
+              },
+              {
+                "name": "feesAmount",
+                "description": "How much fees was added/removed in account"
+              },
+              {
+                "name": "totalBalance",
+                "description": "The running balance still owed for the loan"
+              },
+              {
+                "name": "principalBalance",
+                "description": "The account redraw balance captured after the transaction update"
+              },
+              {
+                "name": "interestRate",
+                "description": "The interest rate for the loan transaction"
+              },
+              {
+                "name": "transactionChannel",
+                "description": "The id of the transaction channel"
+              },
+              {
+                "name": "parentAccountKey",
+                "description": "The key of the parent loan account"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "original_filename": "Bank1_Schema.xlsx",
+      "json_filename": "20251004_222849_schema_c5156429_Bank1_Schema_xlsx.json",
+      "unique_id": "c5156429-d056-4764-b688-f83beec31e66",
+      "data": {
+        "filename": "tmp0wt1i3rm.xlsx",
+        "file_type": "Excel",
+        "is_schema": true,
+        "sheet_count": 7,
+        "total_rows": 151,
+        "sheets": {
+          "Customer": {
+            "title": "Customer",
+            "columns": [
+              "name",
+              "description"
+            ],
+            "row_count": 24,
+            "data": [
+              {
+                "name": "phoneNumber",
+                "description": "The phone number of the customer or prospect"
+              },
+              {
+                "name": "smsNumber",
+                "description": "The mobile SMS number of the customer"
+              },
+              {
+                "name": "email",
+                "description": "Email Identifier of the Customer"
+              },
+              {
+                "name": "street",
+                "description": "Contains the street name of the customer or the property"
+              },
+              {
+                "name": "addressCity",
+                "description": "The town and/or city component of the base address of a customer"
+              },
+              {
+                "name": "country",
+                "description": "Identifies the country of the customer or a property or organization"
+              },
+              {
+                "name": "legalId",
+                "description": "Unique reference number of the legal documents submitted as identification proof"
+              },
+              {
+                "name": "legalDocumentName",
+                "description": "Name of the legal documents such as passport, driving licence etc., provided as identification proof"
+              },
+              {
+                "name": "legalIssueAuthorised",
+                "description": "Authority who issued the legal document"
+              },
+              {
+                "name": "legalIssueCountry",
+                "description": "Indicates the country where the authorized legal document is issued"
+              },
+              {
+                "name": "legalIssueDate",
+                "description": "Date of Issue of the legal document"
+              },
+              {
+                "name": "legalExpiredDate",
+                "description": "Expiry date of the legal document submitted as proof"
+              },
+              {
+                "name": "language",
+                "description": "The language that the contents of the field are displayed in."
+              },
+              {
+                "name": "dateOfBirth",
+                "description": "The date of birth of an individual customer"
+              },
+              {
+                "name": "customerStatus",
+                "description": "The internal bank status of a customer"
+              },
+              {
+                "name": "accountOfficerId",
+                "description": "The identifier of the department head or specific account officer responsible for the customer"
+              },
+              {
+                "name": "gender",
+                "description": "Gender of the Individual Customer"
+              },
+              {
+                "name": "state",
+                "description": "Represents a subdivision of a country such as province, state, region, country"
+              },
+              {
+                "name": "postCode",
+                "description": "Identifies the address postal code for the customer or the property"
+              },
+              {
+                "name": "contactDate",
+                "description": "Date that first contact was made with the Customer."
+              },
+              {
+                "name": "lastName",
+                "description": "The last name of an individual customer"
+              },
+              {
+                "name": "givenName",
+                "description": "Customer's given name"
+              },
+              {
+                "name": "customerType",
+                "description": "Identifies the type of customers. Example Personal, Business, Corporate, etc."
+              },
+              {
+                "name": "customerId",
+                "description": "Identifier of the customer"
+              }
+            ]
+          },
+          "CurSav Accounts": {
+            "title": "Current/Savings Accounts",
+            "columns": [
+              "name",
+              "description"
+            ],
+            "row_count": 16,
+            "data": [
+              {
+                "name": "accountId",
+                "description": "Identifier of the account. Often referred to as the account number"
+              },
+              {
+                "name": "displayName",
+                "description": "Contains the name used for display or enrichment purposes"
+              },
+              {
+                "name": "customerId",
+                "description": "Identifier of the customer"
+              },
+              {
+                "name": "customerRole",
+                "description": "Indicates role of a customer for an arrangement"
+              },
+              {
+                "name": "productId",
+                "description": "Contains the unique identifier of the product"
+              },
+              {
+                "name": "status",
+                "description": "Specifies the status of the agreement"
+              },
+              {
+                "name": "currency",
+                "description": "Identifies the currency. E.g. USD"
+              },
+              {
+                "name": "branch",
+                "description": "Contains the branch name/code in which the business activity was performed"
+              },
+              {
+                "name": "accountOpeningDate",
+                "description": "Contains the opening date of the account"
+              },
+              {
+                "name": "arrangementStartDate",
+                "description": "Indicates the date on which the arrangement was created"
+              },
+              {
+                "name": "availableBalance",
+                "description": "Available balance of the account which is the projected balance"
+              },
+              {
+                "name": "onlineActualBalance",
+                "description": "Real-time balance including all authorised transactions"
+              },
+              {
+                "name": "lockedAmount",
+                "description": "Shows reserved amount for the underlying account"
+              },
+              {
+                "name": "availableLimit",
+                "description": "The portion of an allocated credit limit that is available"
+              },
+              {
+                "name": "productDescription",
+                "description": "Indicates the description of the Product"
+              },
+              {
+                "name": "category",
+                "description": "Indicates the account or contract product name"
+              }
+            ]
+          },
+          "Fixed Term Accounts": {
+            "title": "Fixed Term Accounts",
+            "columns": [
+              "name",
+              "description"
+            ],
+            "row_count": 20,
+            "data": [
+              {
+                "name": "accountId",
+                "description": "Identifier of the account"
+              },
+              {
+                "name": "accountTitles",
+                "description": "Short title on an account"
+              },
+              {
+                "name": "productId",
+                "description": "Contains the unique identifier of the product"
+              },
+              {
+                "name": "currency",
+                "description": "Identifies the currency (e.g. USD"
+              },
+              {
+                "name": "customerId",
+                "description": "Identifier of the customer"
+              },
+              {
+                "name": "customerRole",
+                "description": "Indicates role of a customer for an arrangement"
+              },
+              {
+                "name": "branch",
+                "description": "Contains the branch name/code"
+              },
+              {
+                "name": "reason",
+                "description": "Contains the reason for performing the current activity"
+              },
+              {
+                "name": "maturityDate",
+                "description": "Indicates maturity date of the contract"
+              },
+              {
+                "name": "arrangementEffectiveDate",
+                "description": "It is a date on/upon which an account is considered to take effect"
+              },
+              {
+                "name": "expiryDate",
+                "description": "Indicates the date on which the arrangement expires"
+              },
+              {
+                "name": "agentCustomerId",
+                "description": "The id of the 3rd party who sold the product"
+              },
+              {
+                "name": "expectedBalance",
+                "description": "Indicates the amount expected to be deposited by the customer"
+              },
+              {
+                "name": "currentBalance",
+                "description": "An accounts availableBalance plus any authorized credit"
+              },
+              {
+                "name": "accruedInterest",
+                "description": "The amount of interest that has been accrued"
+              },
+              {
+                "name": "jointCustomerName",
+                "description": "Name of Joint Customer"
+              },
+              {
+                "name": "category",
+                "description": "Indicates the account or contract product name"
+              },
+              {
+                "name": "interestRate",
+                "description": "Identifies the bid rate of the related currency for the defined time period"
+              },
+              {
+                "name": "interestStatement",
+                "description": "Indicates the category of the interest statement (e.g. Monthly"
+              },
+              {
+                "name": "status",
+                "description": "Specifies the status of the agreement"
+              }
+            ]
+          },
+          "Loan Accounts": {
+            "title": "Loan Accounts",
+            "columns": [
+              "name",
+              "description"
+            ],
+            "row_count": 34,
+            "data": [
+              {
+                "name": "accountId",
+                "description": "Identifier of the account"
+              },
+              {
+                "name": "accountName",
+                "description": "Display name or short name of the account specified"
+              },
+              {
+                "name": "productId",
+                "description": "Contains the unique identifier of the product"
+              },
+              {
+                "name": "currency",
+                "description": "Identifies the currency (e.g. USD"
+              },
+              {
+                "name": "customerId",
+                "description": "Contains the customer identifier"
+              },
+              {
+                "name": "customerRole",
+                "description": "Indicates role of a customer for an arrangement"
+              },
+              {
+                "name": "branch",
+                "description": "Contains the branch name/code"
+              },
+              {
+                "name": "reason",
+                "description": "Contains the reason for performing the current activity"
+              },
+              {
+                "name": "maturityDate",
+                "description": "Indicates maturity date of the contract"
+              },
+              {
+                "name": "arrangementEffectiveDate",
+                "description": "It is a date on/upon which an account is considered to take effect"
+              },
+              {
+                "name": "expiryDate",
+                "description": "Indicates the date on which the arrangement expires"
+              },
+              {
+                "name": "agentCustomerIds",
+                "description": "The id of the 3rd party who sold the product"
+              },
+              {
+                "name": "loanBalance",
+                "description": "Indicates the outstanding balance of the loan"
+              },
+              {
+                "name": "availableBalance",
+                "description": "Available balance of the account"
+              },
+              {
+                "name": "loanInterestRate",
+                "description": "Indicates the interest rate of the loan"
+              },
+              {
+                "name": "loanInterestType",
+                "description": "Indicates the interest rate type (Fixed"
+              },
+              {
+                "name": "compoundType",
+                "description": "Contains the frequency type of compound in loan"
+              },
+              {
+                "name": "effectiveRate",
+                "description": "Indicates the actual interest rate applied for the account after adjustment/tier calculation"
+              },
+              {
+                "name": "gracePeriod",
+                "description": "The grace period for loan repayment"
+              },
+              {
+                "name": "periodicPayment",
+                "description": "The periodic payment value"
+              },
+              {
+                "name": "numberPayments",
+                "description": "Specifies the number of coupon or interest payments in a year"
+              },
+              {
+                "name": "paymentFrequency",
+                "description": "The frequency at which a payment is required to be generated"
+              },
+              {
+                "name": "fixedDaysOfMonth",
+                "description": "The days of the month"
+              },
+              {
+                "name": "numberPayments",
+                "description": "Specifies the number of coupon or interest payments in a year"
+              },
+              {
+                "name": "amortisationTerm",
+                "description": "Indicates the amortisation term"
+              },
+              {
+                "name": "principalAmount",
+                "description": "Specifies the price for the first leg of the repo contract in specified currency"
+              },
+              {
+                "name": "principalBalance",
+                "description": "The principal balance due when pay off the account in a future date"
+              },
+              {
+                "name": "interestAmount",
+                "description": "The accrued Interest due or accrued"
+              },
+              {
+                "name": "chargeAmount",
+                "description": "Retrieves the charge amount after redeem"
+              },
+              {
+                "name": "interestBalance",
+                "description": "The interest balance due when pay off the account in a future date"
+              },
+              {
+                "name": "interestFromArrearsBalance",
+                "description": "The interest from arrears balance due when pay off the account in a future date"
+              },
+              {
+                "name": "loanBalance",
+                "description": "Indicates the outstanding balance of the loan"
+              },
+              {
+                "name": "interestAmount",
+                "description": "The accrued Interest due or accrued"
+              },
+              {
+                "name": "accountType",
+                "description": "Groups the products based on their type"
+              }
+            ]
+          },
+          "CurSav Account Transactions": {
+            "title": "Current/Savings  Transactions",
+            "columns": [
+              "name",
+              "description"
+            ],
+            "row_count": 23,
+            "data": [
+              {
+                "name": "transactionReference",
+                "description": "Contains the identifier for the transaction in the core system"
+              },
+              {
+                "name": "activity",
+                "description": "the activity (e.g. CREDIT DEBIT FEE_APPLIED)"
+              },
+              {
+                "name": "transactionAmount",
+                "description": "Contains the transaction amount"
+              },
+              {
+                "name": "currency",
+                "description": "type of currency"
+              },
+              {
+                "name": "effectiveDate",
+                "description": "Indicates the value date on which the underlying accounting entry is to be given value"
+              },
+              {
+                "name": "transactionDate",
+                "description": "Contains the identifier for the transaction date"
+              },
+              {
+                "name": "bookingDate",
+                "description": "Indicates the date on which this business activity is booked in the underlying system"
+              },
+              {
+                "name": "narrative",
+                "description": "The additional text printed on descriptive statements in addition to the standard narrative and/or reference"
+              },
+              {
+                "name": "externalEventStatus",
+                "description": "Determines the status of events sent to external system"
+              },
+              {
+                "name": "userRole",
+                "description": "User who initiated the transaction"
+              },
+              {
+                "name": "branch",
+                "description": "Contains the branch name/code"
+              },
+              {
+                "name": "accountId",
+                "description": "Identifier of the account"
+              },
+              {
+                "name": "chargesPaymentTypeName",
+                "description": "Indicates Payment type set to an account"
+              },
+              {
+                "name": "chargesPropertyName",
+                "description": "Indicates the property description to which benefit has been applied"
+              },
+              {
+                "name": "chargesChargeAmount",
+                "description": "The charges or fees for this transaction"
+              },
+              {
+                "name": "taxRate",
+                "description": "Indicates tax charged to an account"
+              },
+              {
+                "name": "availableBalance",
+                "description": "Available balance of the account"
+              },
+              {
+                "name": "lockedAmount",
+                "description": "Shows reserved amount for the underlying account for a given balance reservation event"
+              },
+              {
+                "name": "approvedOverdraftLimit",
+                "description": "Contains the approved overdraft limit"
+              },
+              {
+                "name": "accrualAmount",
+                "description": "Indicates interest accumulated for an account for the defined time period"
+              },
+              {
+                "name": "effectiveRate",
+                "description": "Indicates the actual interest rate applied for the account after adjustment/tier calculation"
+              },
+              {
+                "name": "availableOverdraftLimit",
+                "description": "Contains the overdraft limit still available to be utilized"
+              },
+              {
+                "name": "channel",
+                "description": "Contains the channel in which the activity was performed"
+              }
+            ]
+          },
+          "Fixed Term Account Transactions": {
+            "title": "Fixed Term Transactions",
+            "columns": [
+              "name",
+              "description"
+            ],
+            "row_count": 17,
+            "data": [
+              {
+                "name": "transactionReference",
+                "description": "Contains the identifier for the transaction in the core system"
+              },
+              {
+                "name": "activity",
+                "description": "the activity (e.g. DEPOSIT WITHDRAWAL FEE_APPLIED)"
+              },
+              {
+                "name": "transactionAmount",
+                "description": "Contains the transaction amount"
+              },
+              {
+                "name": "currency",
+                "description": "Identifier of the currency"
+              },
+              {
+                "name": "effectiveDate",
+                "description": "Indicates the value date on which the underlying accounting entry is to be given value"
+              },
+              {
+                "name": "transactionDate",
+                "description": "Contains the identifier for the transaction date"
+              },
+              {
+                "name": "reason",
+                "description": "Contains the reason for performing the current activity"
+              },
+              {
+                "name": "externalEventStatus",
+                "description": "Determines the status of events sent to external system"
+              },
+              {
+                "name": "userRole",
+                "description": "User who initiated the transaction"
+              },
+              {
+                "name": "branch",
+                "description": "Contains the branch name/code"
+              },
+              {
+                "name": "chargesChargeAmount",
+                "description": "Retrieves the charge amount after redeem"
+              },
+              {
+                "name": "interestAmount",
+                "description": "Indicates the amount of interest for a payment type"
+              },
+              {
+                "name": "taxRate",
+                "description": "Indicates tax charged to an account"
+              },
+              {
+                "name": "currentBalance",
+                "description": "An accounts availableBalance plus any authorized credit and debit movements for the day plus forward movements minus funds in hold"
+              },
+              {
+                "name": "interestRate",
+                "description": "Identifies the bid rate of the related currency for the defined time period"
+              },
+              {
+                "name": "channel",
+                "description": "Contains the channel in which the activity was performed"
+              },
+              {
+                "name": "accountId",
+                "description": "Identifier of the account"
+              }
+            ]
+          },
+          "Loan Account Transactions": {
+            "title": "Loan Transactions",
+            "columns": [
+              "name",
+              "description"
+            ],
+            "row_count": 17,
+            "data": [
+              {
+                "name": "transactionReference",
+                "description": "Contains the identifier for the transaction in the core system"
+              },
+              {
+                "name": "activity",
+                "description": "Id of the activity (e.g. DISBURSEMENT,  REPAYMENT)"
+              },
+              {
+                "name": "transactionAmount",
+                "description": "Contains the transaction amount"
+              },
+              {
+                "name": "currency",
+                "description": "Identifier of the currency"
+              },
+              {
+                "name": "effectiveDate",
+                "description": "Contains the identifier for the transaction date"
+              },
+              {
+                "name": "reason",
+                "description": "Contains the reason for performing the current activity"
+              },
+              {
+                "name": "externalEventStatus",
+                "description": "Determines the status of events sent to external system"
+              },
+              {
+                "name": "userRole",
+                "description": "User who initiated the transaction"
+              },
+              {
+                "name": "branch",
+                "description": "Contains the branch name/code"
+              },
+              {
+                "name": "principalAmount",
+                "description": "Specifies the price for the first leg of the repo contract in specified currency"
+              },
+              {
+                "name": "interestAmount",
+                "description": "The accrued Interest due or accrued"
+              },
+              {
+                "name": "chargeAmount",
+                "description": "Retrieves the charge amount after redeem"
+              },
+              {
+                "name": "balanceAmount",
+                "description": "Amount of the balance"
+              },
+              {
+                "name": "principalAmount",
+                "description": "Specifies the price for the first leg of the repo contract in specified currency"
+              },
+              {
+                "name": "interestRate",
+                "description": "Identifies the bid rate of the related currency for the defined time period"
+              },
+              {
+                "name": "channelName",
+                "description": "Name of the (digital) channel registered by the Customer"
+              },
+              {
+                "name": "accountId",
+                "description": "Identifier of the account"
+              }
+            ]
+          }
+        }
+      }
+    }
+  ]
+}
