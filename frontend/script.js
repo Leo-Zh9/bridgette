@@ -21,14 +21,14 @@ document.addEventListener('DOMContentLoaded', function() {
         link.addEventListener('click', function(e) {
             e.preventDefault();
             const targetId = this.getAttribute('href');
-            const targetSection = document.querySelector(targetId);
+            // const targetSection = document.querySelector(targetId);
             
-            if (targetSection) {
-                targetSection.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
+            // if (targetSection) {
+            //     targetSection.scrollIntoView({
+            //         behavior: 'smooth',
+            //         block: 'start'
+            //     });
+            // }
         });
     });
     
@@ -201,8 +201,13 @@ let selectedFiles2 = [];
 let selectedSchemaFiles1 = [];
 let selectedSchemaFiles2 = [];
 
-// Merging queue functionality
-let mergingQueue = [];
+// Merge widget functionality
+let uploadedFiles = {
+    bank1: [],
+    bank2: []
+};
+
+// Merging queue functionality removed - files processed directly by main.py
 
 function initializeFileUpload() {
     // Initialize regular upload boxes
@@ -424,6 +429,17 @@ function clearSchemaFiles(boxNumber) {
     if (fileInput) fileInput.value = '';
 }
 
+function downloadFiles() {
+    fetch(`${BACKEND_URL}/api/download-files`, {
+        method: 'POST',
+    })
+    .then(response => {
+        console.log('📡 Response status:', response.status);
+        console.log('📡 Response headers:', response.headers);
+        
+    })
+}
+
 function processFiles(boxNumber) {
     const selectedFiles = boxNumber === 1 ? selectedFiles1 : selectedFiles2;
     
@@ -448,9 +464,9 @@ function processFiles(boxNumber) {
         formData.append('files', file);
     });
     
-    // Send files to backend
-    console.log('🚀 Sending request to:', `${BACKEND_URL}/api/process-files`);
-    fetch(`${BACKEND_URL}/api/process-files`, {
+    // Send files to backend with box number
+    console.log('🚀 Sending request to:', `${BACKEND_URL}/api/process-files?box=${boxNumber}`);
+    fetch(`${BACKEND_URL}/api/process-files?box=${boxNumber}`, {
         method: 'POST',
         body: formData
     })
@@ -466,7 +482,7 @@ function processFiles(boxNumber) {
         console.log('✅ Received JSON data:', data);  // Debug log
         if (data.success) {
             // Display JSON results
-            showJsonResults(data.results, data.file_count, boxNumber, data.is_schema);
+            showFileStorageResults(data.results, data.file_count, boxNumber, data.is_schema);
         } else {
             alert(`Error: ${data.error}`);
         }
@@ -503,8 +519,8 @@ function processSchemaFiles(boxNumber) {
         formData.append('files', file);
     });
     
-    // Send files to backend with schema flag
-    fetch(`${BACKEND_URL}/api/process-files?schema=true`, {
+    // Send files to backend with schema flag and box number
+    fetch(`${BACKEND_URL}/api/process-files?schema=true&box=${boxNumber}`, {
         method: 'POST',
         body: formData
     })
@@ -513,7 +529,7 @@ function processSchemaFiles(boxNumber) {
         console.log('DEBUG: Received schema JSON data:', data);  // Debug log
         if (data.success) {
             // Display JSON results
-            showJsonResults(data.results, data.file_count, boxNumber, data.is_schema);
+            showFileStorageResults(data.results, data.file_count, boxNumber, data.is_schema);
         } else {
             alert(`Error: ${data.error}`);
         }
@@ -748,10 +764,13 @@ function showSchemaResults(results, fileCount, boxNumber) {
     clearSchemaFiles(boxNumber);
 }
 
-function showJsonResults(results, fileCount, boxNumber, isSchema) {
-    console.log('DEBUG: showJsonResults called with:', results, fileCount, boxNumber, isSchema);
+function showFileStorageResults(results, fileCount, boxNumber, isSchema) {
+    console.log('DEBUG: showFileStorageResults called with:', results, fileCount, boxNumber, isSchema);
     
-    // Create a modal for displaying JSON results
+    // Update the merge widget with uploaded files
+    updateMergeWidget(results, boxNumber);
+    
+    // Create a modal for displaying file storage results
     const modal = document.createElement('div');
     modal.style.cssText = `
         position: fixed;
@@ -781,8 +800,8 @@ function showJsonResults(results, fileCount, boxNumber, isSchema) {
     const fileTypeLabel = isSchema ? 'Schema' : 'Data';
     let resultsHTML = `
         <div style="text-align: center; margin-bottom: 2rem;">
-            <h3 style="color: #333; margin-bottom: 0.5rem;">JSON Conversion Results - ${fileTypeLabel} Box ${boxNumber}</h3>
-            <p style="color: #666;">Converted ${fileCount} file(s) to JSON format</p>
+            <h3 style="color: #333; margin-bottom: 0.5rem;">File Storage Results - ${fileTypeLabel} Box ${boxNumber}</h3>
+            <p style="color: #666;">Saved ${fileCount} file(s) for main.py access</p>
         </div>
     `;
     
@@ -801,86 +820,28 @@ function showJsonResults(results, fileCount, boxNumber, isSchema) {
         if (result.error) {
             resultsHTML += `
                 <div style="background: white; padding: 1rem; border-radius: 8px;">
-                    <p style="color: #dc3545; font-style: italic;">${result.json_data.error}</p>
+                    <p style="color: #dc3545; font-style: italic;">${result.message}</p>
                 </div>
             `;
         } else {
-            const jsonData = result.json_data;
-            
-            if (jsonData.sheets) {
-                // Multiple sheets Excel file
-                resultsHTML += `
-                    <div style="background: white; padding: 1rem; border-radius: 8px;">
-                        <h5 style="color: #666; margin-bottom: 1rem;">📊 Excel File with ${jsonData.sheet_count} Sheet(s) - Total ${jsonData.total_rows} Rows</h5>
-                        <div style="margin-bottom: 1rem;">
-                            ${result.json_filename ? `
-                                <button onclick="addToMergingQueue('${result.json_filename}', '${result.filename}', '${result.unique_id}')" style="
-                                    background: #28a745;
-                                    color: white;
-                                    padding: 10px 20px;
-                                    border: none;
-                                    border-radius: 5px;
-                                    cursor: pointer;
-                                    font-weight: bold;
-                                ">📋 Add to Merging Queue</button>
-                            ` : ''}
-                        </div>
-                        ${result.json_filename ? `
-                            <div style="background: #e7f3ff; padding: 10px; border-radius: 5px; margin-bottom: 10px; border-left: 3px solid #17a2b8;">
-                                <p style="margin: 0; font-size: 0.9rem; color: #333;">
-                                    <strong>💾 Saved to server:</strong> ${result.json_filename}<br>
-                                    <strong>🔗 API URL:</strong> <code style="background: #f8f9fa; padding: 2px 4px; border-radius: 3px;">http://localhost:5001/api/json-files/${result.json_filename}</code><br>
-                                    <strong>🆔 Unique ID:</strong> ${result.unique_id}
-                                </p>
-                            </div>
-                        ` : ''}
-                `;
-                
-                Object.entries(jsonData.sheets).forEach(([sheetName, sheetData]) => {
-                    const sheetColor = sheetData.error ? '#dc3545' : '#28a745';
-                    resultsHTML += `
-                        <div style="margin: 1rem 0; padding: 1rem; background: #e9ecef; border-radius: 5px; border-left: 3px solid ${sheetColor};">
-                            <h6 style="color: ${sheetColor}; margin-bottom: 0.5rem;">📋 ${sheetData.title}</h6>
-                            <p style="color: #666; font-size: 0.9rem; margin: 0;">Sheet: ${sheetName} | Rows: ${sheetData.row_count || 0}</p>
-                            ${sheetData.columns ? `<p style="color: #666; font-size: 0.8rem; margin: 0.5rem 0;">Columns: ${sheetData.columns.join(', ')}</p>` : ''}
-                        </div>
-                    `;
-                });
-                
-                resultsHTML += `</div>`;
-            } else {
-                // Single sheet file
-                const rowCount = jsonData.row_count || 0;
-                resultsHTML += `
-                    <div style="background: white; padding: 1rem; border-radius: 8px;">
-                        <h5 style="color: #666; margin-bottom: 1rem;">📊 ${jsonData.file_type} File - ${rowCount} Rows</h5>
-                        ${jsonData.title ? `<p style="color: #333; font-weight: bold; margin-bottom: 0.5rem;">${jsonData.title}</p>` : ''}
-                        ${jsonData.columns ? `<p style="color: #666; font-size: 0.9rem; margin-bottom: 1rem;">Columns: ${jsonData.columns.join(', ')}</p>` : ''}
-                        <div style="margin-bottom: 1rem;">
-                            ${result.json_filename ? `
-                                <button onclick="addToMergingQueue('${result.json_filename}', '${result.filename}', '${result.unique_id}')" style="
-                                    background: #28a745;
-                                    color: white;
-                                    padding: 10px 20px;
-                                    border: none;
-                                    border-radius: 5px;
-                                    cursor: pointer;
-                                    font-weight: bold;
-                                ">📋 Add to Merging Queue</button>
-                            ` : ''}
-                        </div>
-                        ${result.json_filename ? `
-                            <div style="background: #e7f3ff; padding: 10px; border-radius: 5px; margin-bottom: 10px; border-left: 3px solid #17a2b8;">
-                                <p style="margin: 0; font-size: 0.9rem; color: #333;">
-                                    <strong>💾 Saved to server:</strong> ${result.json_filename}<br>
-                                    <strong>🔗 API URL:</strong> <code style="background: #f8f9fa; padding: 2px 4px; border-radius: 3px;">http://localhost:5001/api/json-files/${result.json_filename}</code><br>
-                                    <strong>🆔 Unique ID:</strong> ${result.unique_id}
-                                </p>
-                            </div>
-                        ` : ''}
+            // File successfully saved
+            resultsHTML += `
+                <div style="background: white; padding: 1rem; border-radius: 8px;">
+                    <h5 style="color: #666; margin-bottom: 1rem;">📁 File Saved Successfully</h5>
+                    <div style="margin-bottom: 1rem;">
+                        <!-- Merging queue removed - files processed directly by main.py -->
                     </div>
-                `;
-            }
+                    <div style="background: #e7f3ff; padding: 10px; border-radius: 5px; margin-bottom: 10px; border-left: 3px solid #17a2b8;">
+                        <p style="margin: 0; font-size: 0.9rem; color: #333;">
+                            <strong>💾 Saved as:</strong> ${result.saved_filename}<br>
+                            <strong>📁 Location:</strong> uploaded_files/${result.subdirectory}/<br>
+                            <strong>📊 File Type:</strong> ${result.file_type}<br>
+                            <strong>📏 File Size:</strong> ${(result.file_size / 1024).toFixed(1)} KB<br>
+                            <strong>🆔 Unique ID:</strong> ${result.unique_id}
+                        </p>
+                    </div>
+                </div>
+            `;
         }
         
         resultsHTML += `</div>`;
@@ -914,162 +875,7 @@ function showJsonResults(results, fileCount, boxNumber, isSchema) {
     }
 }
 
-function addToMergingQueue(jsonFilename, originalFilename, uniqueId) {
-    // Check if already in queue
-    const exists = mergingQueue.find(item => item.uniqueId === uniqueId);
-    if (exists) {
-        alert('This file is already in the merging queue!');
-        return;
-    }
-    
-    // Add to queue
-    mergingQueue.push({
-        jsonFilename: jsonFilename,
-        originalFilename: originalFilename,
-        uniqueId: uniqueId,
-        addedAt: new Date().toISOString()
-    });
-    
-    // Update merging queue display
-    updateMergingQueueDisplay();
-    
-    alert(`Added "${originalFilename}" to merging queue!`);
-}
-
-function removeFromMergingQueue(uniqueId) {
-    mergingQueue = mergingQueue.filter(item => item.uniqueId !== uniqueId);
-    updateMergingQueueDisplay();
-}
-
-function clearMergingQueue() {
-    mergingQueue = [];
-    updateMergingQueueDisplay();
-}
-
-function updateMergingQueueDisplay() {
-    let queueDisplay = document.getElementById('mergingQueueDisplay');
-    if (!queueDisplay) {
-        // Create the merging queue display if it doesn't exist
-        const queueContainer = document.createElement('div');
-        queueContainer.id = 'mergingQueueContainer';
-        queueContainer.style.cssText = `
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: white;
-            border: 2px solid #28a745;
-            border-radius: 10px;
-            padding: 15px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            z-index: 9999;
-            max-width: 300px;
-            max-height: 400px;
-            overflow-y: auto;
-        `;
-        
-        queueContainer.innerHTML = `
-            <h4 style="margin: 0 0 10px 0; color: #28a745; display: flex; align-items: center;">
-                <span style="margin-right: 8px;">📋</span> Merging Queue
-            </h4>
-            <div id="mergingQueueDisplay"></div>
-            <div style="margin-top: 10px; text-align: center;">
-                <button onclick="startMerging()" style="
-                    background: #28a745;
-                    color: white;
-                    padding: 8px 16px;
-                    border: none;
-                    border-radius: 5px;
-                    cursor: pointer;
-                    margin-right: 5px;
-                ">🚀 Start Merging</button>
-                <button onclick="clearMergingQueue()" style="
-                    background: #dc3545;
-                    color: white;
-                    padding: 8px 16px;
-                    border: none;
-                    border-radius: 5px;
-                    cursor: pointer;
-                ">🗑️ Clear All</button>
-            </div>
-        `;
-        
-        document.body.appendChild(queueContainer);
-        queueDisplay = document.getElementById('mergingQueueDisplay');
-    }
-    
-    if (mergingQueue.length === 0) {
-        queueDisplay.innerHTML = '<p style="color: #666; font-style: italic; margin: 0;">No files in queue</p>';
-        document.getElementById('mergingQueueContainer').style.display = 'none';
-        return;
-    }
-    
-    document.getElementById('mergingQueueContainer').style.display = 'block';
-    
-    let queueHTML = '';
-    mergingQueue.forEach((item, index) => {
-        queueHTML += `
-            <div style="
-                background: #f8f9fa;
-                padding: 8px;
-                border-radius: 5px;
-                margin-bottom: 5px;
-                border-left: 3px solid #28a745;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-            ">
-                <div style="flex: 1;">
-                    <div style="font-weight: bold; font-size: 0.9rem;">${item.originalFilename}</div>
-                    <div style="font-size: 0.8rem; color: #666;">${item.jsonFilename}</div>
-                </div>
-                <button onclick="removeFromMergingQueue('${item.uniqueId}')" style="
-                    background: #dc3545;
-                    color: white;
-                    border: none;
-                    border-radius: 3px;
-                    padding: 4px 8px;
-                    cursor: pointer;
-                    font-size: 0.8rem;
-                ">×</button>
-            </div>
-        `;
-    });
-    
-    queueDisplay.innerHTML = queueHTML;
-}
-
-function startMerging() {
-    if (mergingQueue.length === 0) {
-        alert('No files in merging queue!');
-        return;
-    }
-    
-    // Send merging request to backend
-    fetch(`${BACKEND_URL}/api/start-merging`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            files: mergingQueue
-        })
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            alert('Merging started! Check the console for results.');
-            console.log('Merging results:', data);
-            // Clear the queue after successful start
-            clearMergingQueue();
-        } else {
-            alert(`Error: ${data.error}`);
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        alert('Error starting merging process. Please make sure the backend server is running.');
-    });
-}
+// Removed all merging queue functions - files processed directly by main.py
 
 function formatFileSize(bytes) {
     if (bytes === 0) return '0 Bytes';
@@ -1077,4 +883,204 @@ function formatFileSize(bytes) {
     const sizes = ['Bytes', 'KB', 'MB', 'GB'];
     const i = Math.floor(Math.log(bytes) / Math.log(k));
     return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+}
+
+// Merge Widget Functions
+function updateMergeWidget(results, boxNumber) {
+    const bankKey = `bank${boxNumber}`;
+    
+    // Add new files to the appropriate bank
+    results.forEach(result => {
+        if (result.error === false) {
+            const fileInfo = {
+                filename: result.filename,
+                saved_filename: result.saved_filename,
+                file_size: result.file_size,
+                file_type: result.file_type,
+                unique_id: result.unique_id,
+                subdirectory: result.subdirectory
+            };
+            
+            // Check if file already exists (avoid duplicates)
+            const exists = uploadedFiles[bankKey].find(f => f.unique_id === result.unique_id);
+            if (!exists) {
+                uploadedFiles[bankKey].push(fileInfo);
+            }
+        }
+    });
+    
+    // Update the display
+    updateMergeWidgetDisplay();
+}
+
+function updateMergeWidgetDisplay() {
+    const bank1List = document.getElementById('bank1FilesList');
+    const bank2List = document.getElementById('bank2FilesList');
+    const mergeActions = document.getElementById('mergeActions');
+    
+    // Update Bank 1 files
+    if (uploadedFiles.bank1.length === 0) {
+        bank1List.innerHTML = '<p class="no-files">No files uploaded yet</p>';
+    } else {
+        bank1List.innerHTML = uploadedFiles.bank1.map(file => `
+            <div class="file-item">
+                <div class="file-info">
+                    <div class="file-name">${file.filename}</div>
+                    <div class="file-details">${formatFileSize(file.file_size)} • ${file.file_type}</div>
+                </div>
+            </div>
+        `).join('');
+    }
+    
+    // Update Bank 2 files
+    if (uploadedFiles.bank2.length === 0) {
+        bank2List.innerHTML = '<p class="no-files">No files uploaded yet</p>';
+    } else {
+        bank2List.innerHTML = uploadedFiles.bank2.map(file => `
+            <div class="file-item">
+                <div class="file-info">
+                    <div class="file-name">${file.filename}</div>
+                    <div class="file-details">${formatFileSize(file.file_size)} • ${file.file_type}</div>
+                </div>
+            </div>
+        `).join('');
+    }
+    
+    // Show merge button if both banks have files
+    if (uploadedFiles.bank1.length > 0 && uploadedFiles.bank2.length > 0) {
+        mergeActions.style.display = 'block';
+    } else {
+        mergeActions.style.display = 'none';
+    }
+}
+
+async function startMerge() {
+    const mergeBtn = document.getElementById('mergeBtn');
+    const mergeStatus = document.getElementById('mergeStatus');
+    const mergeResults = document.getElementById('mergeResults');
+    
+    // Show loading state
+    mergeBtn.disabled = true;
+    mergeStatus.style.display = 'flex';
+    
+    try {
+        // Call the backend merge endpoint
+        const response = await fetch(`${BACKEND_URL}/api/trigger-main-processing`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            // Show success results
+            mergeStatus.style.display = 'none';
+            mergeResults.style.display = 'block';
+            
+            // Create download link for Excel file
+            const downloadLink = document.getElementById('downloadLink');
+            
+            if (data.excel_file_name) {
+                // Download the actual Excel file from backend
+                downloadLink.href = `${BACKEND_URL}/api/download-excel/${data.excel_file_name}`;
+                downloadLink.download = data.excel_file_name;
+                downloadLink.style.display = 'inline-block';
+            } else {
+                // Fallback to JSON download if no Excel file
+                const mergedData = createMergedDownloadData(data);
+                const blob = new Blob([JSON.stringify(mergedData, null, 2)], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                
+                downloadLink.href = url;
+                downloadLink.download = `merged_bank_data_${new Date().toISOString().split('T')[0]}.json`;
+            }
+            
+            // Show merge info
+            document.getElementById('mergeInfo').innerHTML = `
+                <strong>Files Processed:</strong> ${data.files_processed}<br>
+                <strong>Total Schemas:</strong> ${data.total_schemas}<br>
+                <strong>Excel File:</strong> ${data.excel_file_name || 'Not created'}<br>
+                <strong>Output Directory:</strong> ${data.output_directory}
+            `;
+            
+            console.log('✅ Merge completed successfully:', data);
+            
+        } else {
+            throw new Error(data.error || 'Merge failed');
+        }
+        
+    } catch (error) {
+        console.error('❌ Merge error:', error);
+        alert(`Error during merge: ${error.message}`);
+        
+        // Hide loading state
+        mergeStatus.style.display = 'none';
+        mergeBtn.disabled = false;
+    }
+}
+
+function createMergedDownloadData(apiData) {
+    return {
+        merge_timestamp: new Date().toISOString(),
+        summary: {
+            files_processed: apiData.files_processed,
+            total_schemas: apiData.total_schemas,
+            json_files_created: apiData.json_files_created.length
+        },
+        bank1_files: uploadedFiles.bank1,
+        bank2_files: uploadedFiles.bank2,
+        processing_results: apiData.results,
+        schema_counts: apiData.schema_counts,
+        output_directory: apiData.output_directory
+    };
+}
+
+async function cleanupAllFiles() {
+    const cleanupBtn = document.getElementById('cleanupBtn');
+    
+    // Show loading state
+    const originalText = cleanupBtn.innerHTML;
+    cleanupBtn.innerHTML = '🔄 Cleaning...';
+    cleanupBtn.disabled = true;
+    
+    try {
+        const response = await fetch(`${BACKEND_URL}/api/cleanup-json-files`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+        
+        const data = await response.json();
+        
+        if (data.success || data.total_cleaned > 0) {
+            // Clear the uploaded files from the frontend display
+            uploadedFiles.bank1 = [];
+            uploadedFiles.bank2 = [];
+            updateMergeWidgetDisplay();
+            
+            // Show success message with details
+            let message = `✅ Cleanup completed!\n\nCleaned ${data.total_cleaned} files:\n${data.cleaned_files.join('\n')}`;
+            
+            if (data.failed_files && data.failed_files.length > 0) {
+                message += `\n\n❌ Failed to clean ${data.total_failed} files:\n${data.failed_files.join('\n')}`;
+                message += `\n\n💡 These files are likely being used by the application. Try stopping and restarting the servers if needed.`;
+            }
+            
+            alert(message);
+            console.log('✅ Cleanup completed:', data.message);
+        } else {
+            throw new Error(data.error || 'Cleanup failed');
+        }
+        
+    } catch (error) {
+        console.error('❌ Cleanup error:', error);
+        alert(`Error during cleanup: ${error.message}`);
+    } finally {
+        // Restore button state
+        cleanupBtn.innerHTML = originalText;
+        cleanupBtn.disabled = false;
+    }
 }

@@ -19,6 +19,7 @@
                     <li><a href="#home">Home</a></li>
                     <li><a href="#about">About</a></li>
                     <li><a href="#services">Services</a></li>
+                    <li><a href="#merge">Merge</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </div>
@@ -177,6 +178,69 @@
                         <span class="file-type">Excel (.xlsx, .xls)</span>
                     </div>
                     <p class="upload-note">Upload any number of files • Maximum file size: 50MB per file</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Merge Widget Section -->
+        <section id="merge" class="merge-widget">
+            <div class="container">
+                <h2>File Merge & Analysis</h2>
+                <div class="merge-container">
+                    <div class="merge-widget-box">
+                        <div class="merge-header">
+                            <h3>📋 Uploaded Files Summary</h3>
+                            <p>Review and merge your uploaded files</p>
+                        </div>
+                        
+                        <div class="uploaded-files-summary" id="uploadedFilesSummary">
+                            <div class="bank-section">
+                                <h4>🏦 Bank 1 Files</h4>
+                                <div class="file-list" id="bank1FilesList">
+                                    <p class="no-files">No files uploaded yet</p>
+                                </div>
+                            </div>
+                            
+                            <div class="bank-section">
+                                <h4>🏦 Bank 2 Files</h4>
+                                <div class="file-list" id="bank2FilesList">
+                                    <p class="no-files">No files uploaded yet</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="merge-actions" id="mergeActions" style="display: none;">
+                            <button class="merge-btn" id="mergeBtn" onclick="startMerge()">
+                                🔄 Merge Bank Data
+                            </button>
+        <button class="cleanup-btn" id="cleanupBtn" onclick="cleanupAllFiles()" style="
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            margin-left: 10px;
+        ">
+            🗑️ Clean All Files
+        </button>
+                            <div class="merge-status" id="mergeStatus" style="display: none;">
+                                <div class="loading-spinner"></div>
+                                <span>Processing files with main.py...</span>
+                            </div>
+                        </div>
+                        
+                        <div class="merge-results" id="mergeResults" style="display: none;">
+                            <h4>✅ Merge Complete!</h4>
+                            <div class="download-section">
+                                <a id="downloadLink" href="#" class="download-btn" onclick="downloadFiles()">
+                                    📥 Download Merged Results
+                                </a>
+                            </div>
+                            <div class="merge-info" id="mergeInfo"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>

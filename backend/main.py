@@ -80,7 +80,7 @@ def convert_to_json(file_path, output_file=None, clean_data=True, include_metada
 
     try:
         if ext == ".csv":
-            print(f"📄 Reading CSV file: {file_path}")
+            print(f"[INFO] Reading CSV file: {file_path}")
             df = pd.read_csv(file_path)
             if clean_data:
                 df = clean_dataframe(df)
@@ -98,11 +98,11 @@ def convert_to_json(file_path, output_file=None, clean_data=True, include_metada
                     "column_count": len(df.columns)
                 }
         else:
-            print(f"📊 Reading Excel file: {file_path}")
+            print(f"[INFO] Reading Excel file: {file_path}")
             xls = read_spreadsheet(file_path)
             
             for sheet_name in xls.sheet_names:
-                print(f"  📋 Processing sheet: {sheet_name}")
+                print(f"  [INFO] Processing sheet: {sheet_name}")
                 df = pd.read_excel(file_path, sheet_name=sheet_name, engine=xls.engine)
                 
                 if clean_data:
@@ -126,13 +126,13 @@ def convert_to_json(file_path, output_file=None, clean_data=True, include_metada
         with open(output_file, "w", encoding="utf-8") as f:
             json.dump(data, f, indent=2, ensure_ascii=False)
         
-        print(f"✅ Successfully converted {file_path} to {output_file}")
-        print(f"📁 Output file size: {os.path.getsize(output_file)} bytes")
+        print(f"[SUCCESS] Successfully converted {file_path} to {output_file}")
+        print(f"[INFO] Output file size: {os.path.getsize(output_file)} bytes")
         
         return data
         
     except Exception as e:
-        print(f"❌ Error processing file: {str(e)}")
+        print(f"[ERROR] Error processing file: {str(e)}")
         raise
 
 def process_file(file_path, output_file=None, clean_data=True, include_metadata=True):
@@ -156,7 +156,7 @@ def process_file(file_path, output_file=None, clean_data=True, include_metadata=
             include_metadata=include_metadata
         )
     except Exception as e:
-        print(f"❌ Error: {e}")
+        print(f"[ERROR] Error: {e}")
         return None
 
 def count_schemas_in_json(json_file_path):
@@ -171,7 +171,7 @@ def count_schemas_in_json(json_file_path):
     """
     try:
         if not os.path.exists(json_file_path):
-            print(f"❌ JSON file not found: {json_file_path}")
+            print(f"[ERROR] JSON file not found: {json_file_path}")
             return None
         
         with open(json_file_path, 'r', encoding='utf-8') as f:
@@ -202,7 +202,7 @@ def count_schemas_in_json(json_file_path):
             "number_of_sheets": len(sheet_counts)
         }
         
-        print(f"📊 Schema count for {os.path.basename(json_file_path)}:")
+        print(f"[INFO] Schema count for {os.path.basename(json_file_path)}:")
         print(f"   Total schemas: {total_schemas}")
         print(f"   Sheets: {len(sheet_counts)}")
         for sheet, count in sheet_counts.items():
@@ -211,7 +211,7 @@ def count_schemas_in_json(json_file_path):
         return result
         
     except Exception as e:
-        print(f"❌ Error counting schemas: {str(e)}")
+        print(f"[ERROR] Error counting schemas: {str(e)}")
         return None
 
 def send_json_to_chatgpt(json_file_path, prompt, json_file_path2=None, api_key=None, model="gpt-4o", max_tokens=10000, temperature=0.7):
@@ -233,7 +233,7 @@ def send_json_to_chatgpt(json_file_path, prompt, json_file_path2=None, api_key=N
     try:
         # Read the first JSON file
         if not os.path.exists(json_file_path):
-            print(f"❌ JSON file not found: {json_file_path}")
+            print(f"[ERROR] JSON file not found: {json_file_path}")
             return None
         
         with open(json_file_path, 'r', encoding='utf-8') as f:
@@ -243,7 +243,7 @@ def send_json_to_chatgpt(json_file_path, prompt, json_file_path2=None, api_key=N
         json_data2 = None
         if json_file_path2:
             if not os.path.exists(json_file_path2):
-                print(f"❌ Second JSON file not found: {json_file_path2}")
+                print(f"[ERROR] Second JSON file not found: {json_file_path2}")
                 return None
             
             with open(json_file_path2, 'r', encoding='utf-8') as f:
@@ -253,8 +253,14 @@ def send_json_to_chatgpt(json_file_path, prompt, json_file_path2=None, api_key=N
         if api_key:
             client = OpenAI(api_key=api_key)
         else:
-            # Use default API key (you should set this as environment variable)
-            client = OpenAI(api_key="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")
+            # Use API key from environment configuration
+            try:
+                from config import Config
+                client = OpenAI(api_key=Config.OPENAI_API_KEY)
+            except ImportError:
+                raise ValueError("Configuration not found. Please ensure config.py exists and .env file is set up.")
+            except Exception as e:
+                raise ValueError(f"Error loading API key: {e}")
         
         # Prepare the data for the prompt
         json_str1 = json.dumps(json_data1, indent=2, ensure_ascii=False)
@@ -283,7 +289,7 @@ def send_json_to_chatgpt(json_file_path, prompt, json_file_path2=None, api_key=N
             else:
                 json_str1 = json_str1[:max_length] + "\n... (truncated due to length)"
             
-            print("⚠️  JSON data was truncated due to length")
+            print("[WARNING] JSON data was truncated due to length")
         
         # Create the full prompt
         if json_data2:
@@ -304,11 +310,11 @@ Here is the JSON data:
 {json_str1}
 """
         
-        print(f"🤖 Sending request to ChatGPT...")
-        print(f"📄 JSON file 1: {json_file_path}")
+        print(f"[INFO] Sending request to ChatGPT...")
+        print(f"[INFO] JSON file 1: {json_file_path}")
         if json_file_path2:
-            print(f"📄 JSON file 2: {json_file_path2}")
-        print(f"📝 Prompt: {prompt[:100]}{'...' if len(prompt) > 100 else ''}")
+            print(f"[INFO] JSON file 2: {json_file_path2}")
+        print(f"[INFO] Prompt: {prompt[:100]}{'...' if len(prompt) > 100 else ''}")
         
         # Send to ChatGPT
         response = client.chat.completions.create(
@@ -328,12 +334,12 @@ messages=[
         )
         
         result = response.choices[0].message.content
-        print(f"✅ Received response from ChatGPT ({len(result)} characters)")
+        print(f"[SUCCESS] Received response from ChatGPT ({len(result)} characters)")
         
         return result
         
     except Exception as e:
-        print(f"❌ Error sending to ChatGPT: {str(e)}")
+        print(f"[ERROR] Error sending to ChatGPT: {str(e)}")
         return None
 
 def parse_chatgpt_response(response_text, bank1_data, bank2_data):
@@ -539,7 +545,7 @@ def parse_chatgpt_response(response_text, bank1_data, bank2_data):
         }
         
     except Exception as e:
-        print(f"❌ Error parsing ChatGPT response: {str(e)}")
+        print(f"[ERROR] Error parsing ChatGPT response: {str(e)}")
         return None
 
 def create_schema_json_files(parsed_data, output_dir="."):
@@ -566,7 +572,7 @@ def create_schema_json_files(parsed_data, output_dir="."):
                 "statistics": parsed_data["statistics"]
             }, f, indent=2, ensure_ascii=False)
         file_paths["matched"] = matched_file
-        print(f"✅ Created matched schemas file: {matched_file}")
+        print(f"[SUCCESS] Created matched schemas file: {matched_file}")
         
         # Create unmatched Bank 1 schemas JSON
         unmatched_bank1_file = os.path.join(output_dir, "unmatched_bank1_schemas.json")
@@ -577,7 +583,7 @@ def create_schema_json_files(parsed_data, output_dir="."):
                 "count": len(parsed_data["unmatched_bank1"])
             }, f, indent=2, ensure_ascii=False)
         file_paths["unmatched_bank1"] = unmatched_bank1_file
-        print(f"✅ Created unmatched Bank 1 schemas file: {unmatched_bank1_file}")
+        print(f"[SUCCESS] Created unmatched Bank 1 schemas file: {unmatched_bank1_file}")
         
         # Create unmatched Bank 2 schemas JSON
         unmatched_bank2_file = os.path.join(output_dir, "unmatched_bank2_schemas.json")
@@ -588,11 +594,11 @@ def create_schema_json_files(parsed_data, output_dir="."):
                 "count": len(parsed_data["unmatched_bank2"])
             }, f, indent=2, ensure_ascii=False)
         file_paths["unmatched_bank2"] = unmatched_bank2_file
-        print(f"✅ Created unmatched Bank 2 schemas file: {unmatched_bank2_file}")
+        print(f"[SUCCESS] Created unmatched Bank 2 schemas file: {unmatched_bank2_file}")
         
         # Print statistics
         stats = parsed_data["statistics"]
-        print(f"\n📊 Schema Matching Statistics:")
+        print(f"\n[INFO] Schema Matching Statistics:")
         print(f"   Total matched: {stats['total_matched']}")
         print(f"   Unmatched Bank 1: {stats['total_unmatched_bank1']}")
         print(f"   Unmatched Bank 2: {stats['total_unmatched_bank2']}")
@@ -601,7 +607,7 @@ def create_schema_json_files(parsed_data, output_dir="."):
         return file_paths
         
     except Exception as e:
-        print(f"❌ Error creating JSON files: {str(e)}")
+        print(f"[ERROR] Error creating JSON files: {str(e)}")
         return None
 
 def find_data_files_by_category(category_name, bank_num):
@@ -617,7 +623,8 @@ def find_data_files_by_category(category_name, bank_num):
     """
     import glob
     
-    bank_dir = f"Archive/Bank {bank_num} Data"
+    # Updated to look in uploaded_files directory instead of Archive
+    bank_dir = f"uploaded_files/bank{bank_num}"
     matching_files = []
     
     # Common patterns for different categories
@@ -711,16 +718,18 @@ def extract_column_data(file_path, column_name, customer_id_column="customerId")
         if ext == ".csv":
             df = pd.read_csv(file_path)
         else:
-            df = pd.read_excel(file_path)
+            # Use context manager to ensure file is properly closed
+            with pd.ExcelFile(file_path) as xls:
+                df = pd.read_excel(xls)
         
         # Check if the column exists
         if column_name not in df.columns:
-            print(f"⚠️  Column '{column_name}' not found in {file_path}")
+            print(f"[WARNING] Column '{column_name}' not found in {file_path}")
             return {}
         
         # Check if customer ID column exists
         if customer_id_column not in df.columns:
-            print(f"⚠️  Customer ID column '{customer_id_column}' not found in {file_path}")
+            print(f"[WARNING] Customer ID column '{customer_id_column}' not found in {file_path}")
             return {}
         
         # Create mapping of customer_id to column value
@@ -730,11 +739,11 @@ def extract_column_data(file_path, column_name, customer_id_column="customerId")
             column_value = row[column_name]
             data_map[customer_id] = column_value
         
-        print(f"✅ Extracted {len(data_map)} records from {column_name} in {os.path.basename(file_path)}")
+        print(f"[SUCCESS] Extracted {len(data_map)} records from {column_name} in {os.path.basename(file_path)}")
         return data_map
         
     except Exception as e:
-        print(f"❌ Error extracting data from {file_path}: {str(e)}")
+        print(f"[ERROR] Error extracting data from {file_path}: {str(e)}")
         return {}
 
 def create_combined_customer_data(matched_schemas, output_file="combined_customer_data.xlsx", max_customers=1000):
@@ -750,7 +759,7 @@ def create_combined_customer_data(matched_schemas, output_file="combined_custome
         str: Path to the created file
     """
     try:
-        print("🔄 Creating combined customer data...")
+        print("[INFO] Creating combined customer data...")
         
         # Get customer IDs from each bank separately (don't try to match them)
         bank1_customer_ids = set()
@@ -760,33 +769,37 @@ def create_combined_customer_data(matched_schemas, output_file="combined_custome
         bank1_customer_files = find_data_files_by_category("customer", 1)
         for file_path in bank1_customer_files:
             try:
-                df = pd.read_excel(file_path)
-                if "customerId" in df.columns:
-                    # Limit to first max_customers for performance
-                    customer_ids = df["customerId"].head(max_customers).tolist()
-                    bank1_customer_ids.update(customer_ids)
+                # Use context manager to ensure file is properly closed
+                with pd.ExcelFile(file_path) as xls:
+                    df = pd.read_excel(xls)
+                    if "customerId" in df.columns:
+                        # Limit to first max_customers for performance
+                        customer_ids = df["customerId"].head(max_customers).tolist()
+                        bank1_customer_ids.update(customer_ids)
             except Exception as e:
-                print(f"⚠️  Error reading {file_path}: {e}")
+                print(f"[WARNING] Error reading {file_path}: {e}")
         
         # Collect customer IDs from Bank 2
         bank2_customer_files = find_data_files_by_category("customer", 2)
         for file_path in bank2_customer_files:
             try:
-                df = pd.read_excel(file_path)
-                if "id" in df.columns:
-                    # Limit to first max_customers for performance
-                    customer_ids = df["id"].head(max_customers).tolist()
-                    bank2_customer_ids.update(customer_ids)
+                # Use context manager to ensure file is properly closed
+                with pd.ExcelFile(file_path) as xls:
+                    df = pd.read_excel(xls)
+                    if "id" in df.columns:
+                        # Limit to first max_customers for performance
+                        customer_ids = df["id"].head(max_customers).tolist()
+                        bank2_customer_ids.update(customer_ids)
             except Exception as e:
-                print(f"⚠️  Error reading {file_path}: {e}")
+                print(f"[WARNING] Error reading {file_path}: {e}")
         
         # Create combined list with bank prefixes to keep them separate
         all_customer_ids = [f"B1_{cid}" for cid in bank1_customer_ids] + [f"B2_{cid}" for cid in bank2_customer_ids]
         
-        print(f"📊 Found {len(bank1_customer_ids)} Bank 1 customers and {len(bank2_customer_ids)} Bank 2 customers")
+        print(f"[INFO] Found {len(bank1_customer_ids)} Bank 1 customers and {len(bank2_customer_ids)} Bank 2 customers")
         
         # Create Bank 2 ID mapping (encodedKey -> id)
-        print("🔄 Creating Bank 2 ID mapping...")
+        print("[INFO] Creating Bank 2 ID mapping...")
         bank2_id_mapping = {}
         bank2_customer_files = find_data_files_by_category("customer", 2)
         for file_path in bank2_customer_files:
@@ -798,15 +811,15 @@ def create_combined_customer_data(matched_schemas, output_file="combined_custome
                         encoded_key = row["encodedKey"]
                         bank2_id_mapping[encoded_key] = customer_id
             except Exception as e:
-                print(f"⚠️  Error reading {file_path}: {e}")
+                print(f"[WARNING] Error reading {file_path}: {e}")
         
-        print(f"📊 Created mapping for {len(bank2_id_mapping)} Bank 2 IDs")
+        print(f"[INFO] Created mapping for {len(bank2_id_mapping)} Bank 2 IDs")
         
         # Add hardcoded fixes for missing data
-        print("🔧 Applying hardcoded fixes for missing data...")
+        print("[INFO] Applying hardcoded fixes for missing data...")
         
         # Pre-load all data maps for efficiency
-        print("🔄 Pre-loading data maps...")
+        print("[INFO] Pre-loading data maps...")
         data_maps = {}
         
         for match in matched_schemas:
@@ -852,14 +865,14 @@ def create_combined_customer_data(matched_schemas, output_file="combined_custome
                         data_maps[key] = raw_data
         
         # Apply hardcoded fixes for missing data
-        print("🔧 Applying hardcoded data fixes...")
+        print("[INFO] Applying hardcoded data fixes...")
         
         # Fix 1: Ensure Bank 2 account data uses correct customer ID mapping
         for key in data_maps:
             if "bank2" in key and "account" in key.lower():
                 # Re-extract with proper mapping if data is empty
                 if len(data_maps[key]) == 0:
-                    print(f"🔧 Fixing empty data for {key}")
+                    print(f"[INFO] Fixing empty data for {key}")
                     # Find the original file and re-extract
                     for match in matched_schemas:
                         bank2_schema = match["bank2"]
@@ -880,7 +893,7 @@ def create_combined_customer_data(matched_schemas, output_file="combined_custome
         for key in data_maps:
             if "transaction" in key.lower():
                 if len(data_maps[key]) == 0:
-                    print(f"🔧 Fixing empty transaction data for {key}")
+                    print(f"[INFO] Fixing empty transaction data for {key}")
                     # Re-extract transaction data with proper account ID mapping
                     for match in matched_schemas:
                         if "bank1" in key:
@@ -911,7 +924,7 @@ def create_combined_customer_data(matched_schemas, output_file="combined_custome
                                         data_maps[key] = mapped_data
                                         break
         
-        print(f"✅ Applied hardcoded fixes")
+        print(f"[SUCCESS] Applied hardcoded fixes")
         
         # Create combined data structure
         combined_data = []
@@ -950,14 +963,14 @@ def create_combined_customer_data(matched_schemas, output_file="combined_custome
         df_combined = pd.DataFrame(combined_data)
         df_combined.to_excel(output_file, index=False)
         
-        print(f"✅ Created combined customer data file: {output_file}")
-        print(f"📊 Combined data shape: {df_combined.shape}")
-        print(f"📋 Columns: {list(df_combined.columns)}")
+        print(f"[SUCCESS] Created combined customer data file: {output_file}")
+        print(f"[INFO] Combined data shape: {df_combined.shape}")
+        print(f"[INFO] Columns: {list(df_combined.columns)}")
         
         return output_file
         
     except Exception as e:
-        print(f"❌ Error creating combined customer data: {str(e)}")
+        print(f"[ERROR] Error creating combined customer data: {str(e)}")
         return None
 
 def process_chatgpt_schema_analysis(chatgpt_response, bank1_json_path, bank2_json_path, output_dir="schema_analysis"):
@@ -985,23 +998,23 @@ def process_chatgpt_schema_analysis(chatgpt_response, bank1_json_path, bank2_jso
         parsed_data = parse_chatgpt_response(chatgpt_response, bank1_data, bank2_data)
         
         if not parsed_data:
-            print("❌ Failed to parse ChatGPT response")
+            print("[ERROR] Failed to parse ChatGPT response")
             return None
         
         # Create separate JSON files
         file_paths = create_schema_json_files(parsed_data, output_dir)
         
         if file_paths:
-            print(f"\n✅ Successfully processed ChatGPT response and created JSON files:")
+            print(f"\n[SUCCESS] Successfully processed ChatGPT response and created JSON files:")
             for file_type, file_path in file_paths.items():
                 print(f"   {file_type}: {file_path}")
             return file_paths
         else:
-            print("❌ Failed to create JSON files")
+            print("[ERROR] Failed to create JSON files")
             return None
             
     except Exception as e:
-        print(f"❌ Error processing ChatGPT response: {str(e)}")
+        print(f"[ERROR] Error processing ChatGPT response: {str(e)}")
         return None
 
 def main():
@@ -1022,7 +1035,7 @@ def main():
             include_metadata=not args.no_metadata
         )
     except Exception as e:
-        print(f"❌ Error: {e}")
+        print(f"[ERROR] Error: {e}")
         sys.exit(1)
 
  
@@ -1104,7 +1117,7 @@ Ensure all numbers align and confirm that no schemas were left out in your analy
        "Bank2_Schema_converted.json")
     
     if response:
-        print("🤖 ChatGPT Response received, parsing and creating JSON files...")
+        print("[INFO] ChatGPT Response received, parsing and creating JSON files...")
         
         # Parse the ChatGPT response
         parsed_data = parse_chatgpt_response(response, bank1_data, bank2_data)
@@ -1114,27 +1127,27 @@ Ensure all numbers align and confirm that no schemas were left out in your analy
             file_paths = create_schema_json_files(parsed_data, "schema_analysis")
             
             if file_paths:
-                print(f"\n✅ Successfully created all JSON files:")
+                print(f"\n[SUCCESS] Successfully created all JSON files:")
                 for file_type, file_path in file_paths.items():
                     print(f"   {file_type}: {file_path}")
                 
                 # Create combined customer data spreadsheet
-                print(f"\n🔄 Creating combined customer data spreadsheet...")
+                print(f"\n[INFO] Creating combined customer data spreadsheet...")
                 combined_file = create_combined_customer_data(
                     parsed_data["matched_schemas"], 
                     "combined_customer_data.xlsx"
                 )
                 
                 if combined_file:
-                    print(f"✅ Successfully created combined customer data: {combined_file}")
+                    print(f"[SUCCESS] Successfully created combined customer data: {combined_file}")
                 else:
-                    print("❌ Failed to create combined customer data")
+                    print("[ERROR] Failed to create combined customer data")
             else:
-                print("❌ Failed to create JSON files")
+                print("[ERROR] Failed to create JSON files")
         else:
-            print("❌ Failed to parse ChatGPT response")
+            print("[ERROR] Failed to parse ChatGPT response")
     else:
-        print("❌ Failed to get response from ChatGPT")
+        print("[ERROR] Failed to get response from ChatGPT")
     
     # response = send_json_to_chatgpt("Bank1_Mock_CurSav_Transactions_converted.json", "What patterns do you see in these transactions?")
     
