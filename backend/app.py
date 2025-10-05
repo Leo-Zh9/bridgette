@@ -24,8 +24,13 @@ MAX_FILE_SIZE = 50 * 1024 * 1024  # 50MB
 
 # Create directory for storing original uploaded files
 UPLOAD_STORAGE_DIR = 'uploaded_files'
+EXCEL_OUTPUT_DIR = 'generated_excel_files'
+
 if not os.path.exists(UPLOAD_STORAGE_DIR):
     os.makedirs(UPLOAD_STORAGE_DIR)
+    
+if not os.path.exists(EXCEL_OUTPUT_DIR):
+    os.makedirs(EXCEL_OUTPUT_DIR)
 
 # Create directory for temporary JSON files
 JSON_TEMP_DIR = 'temp_json_files'
@@ -275,8 +280,28 @@ def extract_schema_title_from_excel(file_path, sheet_name):
 
 @app.route('/api/download-files', methods=['POST'])
 def download_files():
-    print("Downloading files")
-    
+    """Download the latest generated Excel file"""
+    try:
+        # Find the most recent Excel file in the designated directory
+        import glob
+        excel_files = glob.glob(os.path.join(EXCEL_OUTPUT_DIR, "*.xlsx"))
+        
+        if not excel_files:
+            return jsonify({'error': 'No Excel file found'}), 404
+        
+        # Get the most recent file
+        latest_file = max(excel_files, key=os.path.getctime)
+        filename = os.path.basename(latest_file)
+        
+        return jsonify({
+            'success': True,
+            'filename': filename,
+            'download_url': f'/api/download-excel/{filename}'
+        })
+        
+    except Exception as e:
+        print(f"Error in download_files: {e}")
+        return jsonify({'error': str(e)}), 500
 
 @app.route('/api/process-files', methods=['POST'])
 def process_files():
@@ -737,7 +762,7 @@ Return the result in a structured JSON format with matched and unmatched schemas
                         if parsed_data:
                             # Create combined Excel file
                             excel_filename = f"combined_customer_data_{int(time.time())}.xlsx"
-                            excel_file_path = os.path.join(os.getcwd(), excel_filename)
+                            excel_file_path = os.path.join(EXCEL_OUTPUT_DIR, excel_filename)
                             
                             combined_file = create_combined_customer_data(
                                 parsed_data["matched_schemas"], 
@@ -756,7 +781,7 @@ Return the result in a structured JSON format with matched and unmatched schemas
                         print("No response from ChatGPT - creating fallback Excel file...")
                         # Create a fallback Excel file with all data combined
                         excel_filename = f"combined_customer_data_fallback_{int(time.time())}.xlsx"
-                        excel_file_path = os.path.join(os.getcwd(), excel_filename)
+                        excel_file_path = os.path.join(EXCEL_OUTPUT_DIR, excel_filename)
                         
                         # Create a simple combined Excel file with all data
                         try:
@@ -797,16 +822,30 @@ Return the result in a structured JSON format with matched and unmatched schemas
 
 @app.route('/api/download-excel/<filename>', methods=['GET'])
 def download_excel_file(filename):
-    """Download the merged Excel file"""
+    """Download the merged Excel file and delete it after download"""
     try:
-        # Look for the Excel file in the current directory
-        excel_path = os.path.join(os.getcwd(), filename)
+        # Look for the Excel file in the designated directory
+        excel_path = os.path.join(EXCEL_OUTPUT_DIR, filename)
         
         if not os.path.exists(excel_path):
             return jsonify({'error': 'Excel file not found'}), 404
         
-        # Send the file
-        return send_file(excel_path, as_attachment=True, download_name=filename)
+        # Send the file and then delete it
+        response = send_file(excel_path, as_attachment=True, download_name=filename)
+        
+        # Delete the file after sending (in a separate thread to avoid blocking)
+        import threading
+        def delete_file():
+            try:
+                os.remove(excel_path)
+                print(f"Deleted file: {filename}")
+            except Exception as e:
+                print(f"Error deleting file {filename}: {e}")
+        
+        # Start deletion in background
+        threading.Thread(target=delete_file).start()
+        
+        return response
         
     except Exception as e:
         return jsonify({'error': f'Error downloading Excel file: {str(e)}'}), 500

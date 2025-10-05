@@ -433,11 +433,29 @@ function downloadFiles() {
     fetch(`${BACKEND_URL}/api/download-files`, {
         method: 'POST',
     })
-    .then(response => {
-        console.log('📡 Response status:', response.status);
-        console.log('📡 Response headers:', response.headers);
+    .then(response => response.json())
+    .then(data => {
+        console.log('📡 Download response:', data);
         
+        if (data.success && data.download_url) {
+            // Create a temporary link to download the file
+            const link = document.createElement('a');
+            link.href = `${BACKEND_URL}${data.download_url}`;
+            link.download = data.filename;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            console.log('✅ File download initiated:', data.filename);
+        } else {
+            console.error('❌ Download failed:', data.error);
+            alert(`Download failed: ${data.error || 'Unknown error'}`);
+        }
     })
+    .catch(error => {
+        console.error('❌ Download error:', error);
+        alert(`Download error: ${error.message}`);
+    });
 }
 
 function processFiles(boxNumber) {
